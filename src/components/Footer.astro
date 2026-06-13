@@ -1,0 +1,27 @@
+---
+import { profile, socials } from '../data/profile';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-200 dark:border-slate-800">
+  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row">
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+      © {year} {profile.name}. Built with Astro.
+    </p>
+    <ul class="flex items-center gap-4">
+      {
+        socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              class="text-sm font-medium text-slate-500 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400"
+              {...s.label !== 'Email' ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+            >
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,36 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section id="about" class="scroll-mt-16 py-20">
+  <div class="mx-auto grid max-w-5xl gap-10 px-5 md:grid-cols-[1fr_1.6fr] md:items-start">
+    <!-- Photo placeholder -->
+    <div class="reveal">
+      <div
+        class="aspect-square w-full max-w-xs rounded-2xl bg-gradient-to-br from-accent-500/20 to-cyan-400/20 ring-1 ring-slate-200 dark:ring-slate-800"
+      >
+        <div class="flex h-full items-center justify-center text-sm text-slate-400 dark:text-slate-500">
+          {/* TODO: add /public/portrait.jpg and replace this block with an <img> */}
+          Your photo here
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">About me</h2>
+      <div class="mt-4 space-y-4 text-slate-600 dark:text-slate-300">
+        {profile.bio.map((p) => <p>{p}</p>)}
+      </div>
+      <dl class="mt-6 flex flex-wrap gap-x-10 gap-y-3 text-sm">
+        <div>
+          <dt class="font-semibold text-slate-900 dark:text-white">Role</dt>
+          <dd class="text-slate-600 dark:text-slate-300">{profile.role} @ {profile.company}</dd>
+        </div>
+        <div>
+          <dt class="font-semibold text-slate-900 dark:text-white">Based in</dt>
+          <dd class="text-slate-600 dark:text-slate-300">{profile.location}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

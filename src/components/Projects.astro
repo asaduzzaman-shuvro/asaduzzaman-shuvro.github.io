@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const all = await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true);
+
+// Professional first, then by `order`.
+const typeRank = { professional: 0, 'open-source': 1 } as const;
+const projects = all.sort((a, b) => {
+  const t = typeRank[a.data.type] - typeRank[b.data.type];
+  return t !== 0 ? t : a.data.order - b.data.order;
+});
+---
+
+<section id="work" class="scroll-mt-16 border-t border-slate-100 py-20 dark:border-slate-900">
+  <div class="mx-auto max-w-5xl px-5">
+    <div class="reveal max-w-2xl">
+      <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+        Selected work
+      </h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-300">
+        Products I've led and built — professional case studies alongside open-source projects.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        projects.map((p) => (
+          <ProjectCard
+            title={p.data.title}
+            summary={p.data.summary}
+            type={p.data.type}
+            tech={p.data.tech}
+            href={`/projects/${p.id}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
