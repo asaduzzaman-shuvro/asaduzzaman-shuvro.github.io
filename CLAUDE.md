@@ -66,10 +66,19 @@ single Vite. Re-test the build before changing or removing it.
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/deploy.yml` (`withastro/action` →
-`actions/deploy-pages`). The repo is `asaduzzaman-shuvro.github.io`; Pages source must be
-set to "GitHub Actions". `astro.config.mjs` `site` must match the deployed origin (used for
-canonical URLs, sitemap, and RSS).
+Live at https://asaduzzaman-shuvro.github.io (repo `asaduzzaman-shuvro.github.io`).
+
+**Current method — branch-based** (`npm run deploy`, i.e. `scripts/deploy.sh`): builds and
+force-pushes `dist/` to the `gh-pages` branch, which Pages serves. `dist/.nojekyll` is
+required so the `_astro/` directory isn't stripped by Jekyll. This is used because the local
+`gh` token lacks the `workflow` scope.
+
+**To switch to auto-deploy-on-push (preferred):** run `gh auth refresh -h github.com -s
+workflow`, move `docs/deploy-workflow.yml.disabled` back to `.github/workflows/deploy.yml`,
+commit + push, and set the Pages source to "GitHub Actions" in repo settings.
+
+`astro.config.mjs` `site` must match the deployed origin (used for canonical URLs, sitemap,
+and RSS).
 
 ## Placeholders to replace (see `public/README-assets.md`)
 

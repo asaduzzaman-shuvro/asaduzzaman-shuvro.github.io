@@ -11,7 +11,12 @@ npm install        # install dependencies
 npm run dev        # local dev server at http://localhost:4321
 npm run build      # production build to ./dist
 npm run preview    # preview the production build
+npm run deploy     # build and publish ./dist to the gh-pages branch (GitHub Pages)
 ```
+
+Live at <https://asaduzzaman-shuvro.github.io>. Deploys publish the build to the `gh-pages`
+branch (see `scripts/deploy.sh`). To switch to auto-deploy on `git push`, see the
+Deployment notes in `CLAUDE.md`.
 
 ## Structure
 
