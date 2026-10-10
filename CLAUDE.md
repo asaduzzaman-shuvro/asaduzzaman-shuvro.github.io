@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal portfolio + blog for Asaduzzaman Shuvro (Engineering Lead, Mobile & Backend),
+Personal portfolio + blog for Asaduzzaman Shuvro (Staff Software Engineer, Mobile & Backend),
 built with Astro + Tailwind CSS v4, statically generated and deployed to GitHub Pages.
 
 ## Commands
@@ -13,6 +13,7 @@ built with Astro + Tailwind CSS v4, statically generated and deployed to GitHub 
 npm run dev      # dev server at http://localhost:4321
 npm run build    # static build to ./dist (also runs content sync + type gen)
 npm run preview  # serve the built ./dist locally
+npm run cv       # render the /cv page to public/cv.pdf (headless Chrome; deploy runs it too)
 ```
 
 There is no test suite. The quality gate is the production build plus Lighthouse against
@@ -82,9 +83,20 @@ and RSS).
 
 ## Placeholders to replace (see `public/README-assets.md`)
 
-`public/cv.pdf` (missing — the Download CV buttons 404 until added), `public/og.svg`
-(replace with a 1200×630 PNG), the About-section photo, the placeholder LinkedIn URL in
-`profile.ts`, and the two `draft: true` professional case studies in `src/content/projects/`.
+`public/og.svg` (replace with a 1200×630 PNG) and the About-section photo
+(`public/portrait.jpg`).
+
+**The CV is generated, not hand-made.** `src/pages/cv.astro` is a print-styled A4 page built
+from `profile.ts` (summary, experience, skills, education, languages) plus the projects
+collection; `npm run cv` (`scripts/cv-pdf.sh`) prints it to `public/cv.pdf`. Edit the data,
+not the PDF. Keep heading letter-spacing tight on that page — wide tracking makes PDF text
+extractors (and ATS parsers) split words into letters. It deliberately has no phone or
+address.
+
+Work history lives in `experience` in `profile.ts` (years only — the resume and LinkedIn
+disagree on exact months). The professional case studies (`dn-news-app.md`,
+`braze-connector.md`) name NHST Media Group clients publicly; keep claims to what the resume
+states.
 
 ## Working docs
 
