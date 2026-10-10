@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "bash scripts/deploy.sh",
+    "cv": "bash scripts/cv-pdf.sh",
     "astro": "astro"
   },
   "dependencies": {

@@ -9,6 +9,9 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+echo "▶ Rendering CV → public/cv.pdf…"
+bash scripts/cv-pdf.sh
+
 echo "▶ Building…"
 npm run build
 touch dist/.nojekyll
