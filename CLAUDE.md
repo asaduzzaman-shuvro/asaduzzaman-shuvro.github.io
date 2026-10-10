@@ -83,8 +83,10 @@ and RSS).
 
 ## Placeholders to replace (see `public/README-assets.md`)
 
-`public/og.svg` (replace with a 1200×630 PNG) and the About-section photo
-(`public/portrait.jpg`).
+`public/og.svg` (replace with a 1200×630 PNG).
+
+The About photo is `src/assets/portrait.jpg` (1200px square crop, EXIF stripped), rendered via
+`astro:assets` `<Image>` so the build emits small WebP variants — don't move it to `public/`.
 
 **The CV is generated, not hand-made.** `src/pages/cv.astro` is a print-styled A4 page built
 from `profile.ts` (summary, experience, skills, education, languages) plus the projects
