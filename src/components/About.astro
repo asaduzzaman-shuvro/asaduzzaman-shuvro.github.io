@@ -1,17 +1,22 @@
 ---
+import { Image } from 'astro:assets';
 import { profile } from '../data/profile';
+import portrait from '../assets/portrait.jpg';
 ---
 
 <section id="about" class="scroll-mt-14 border-b border-line py-24">
   <div class="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.5fr] md:items-start">
     <div class="reveal">
       <p class="mono-label mb-4">// about</p>
-      <!-- Photo placeholder — replace with /public/portrait.jpg -->
       <div class="relative aspect-square w-full max-w-sm border border-line bg-panel">
-        <div class="grid-lines absolute inset-0 opacity-30" aria-hidden="true"></div>
-        <div class="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-wider text-faint uppercase">
-          portrait.jpg
-        </div>
+        <Image
+          src={portrait}
+          alt={`Portrait of ${profile.name}`}
+          widths={[384, 768]}
+          sizes="(min-width: 768px) 384px, 100vw"
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
         <span class="absolute bottom-0 left-0 h-3 w-3 bg-lime" aria-hidden="true"></span>
       </div>
     </div>
