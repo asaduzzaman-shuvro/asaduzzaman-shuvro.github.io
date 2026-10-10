@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio and blog for **Asaduzzaman Shuvro** — Engineering Lead, Mobile & Backend.
+Personal portfolio and blog for **Asaduzzaman Shuvro** — Staff Software Engineer, Mobile & Backend.
 Built with [Astro](https://astro.build) + [Tailwind CSS](https://tailwindcss.com), deployed
 to GitHub Pages.
 

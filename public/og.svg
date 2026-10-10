@@ -11,6 +11,6 @@
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <text x="80" y="300" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Asaduzzaman Shuvro</text>
-  <text x="80" y="380" font-family="Inter, sans-serif" font-size="44" font-weight="700" fill="url(#accent)">Engineering Lead · Mobile &amp; Backend</text>
+  <text x="80" y="380" font-family="Inter, sans-serif" font-size="44" font-weight="700" fill="url(#accent)">Staff Software Engineer · Mobile &amp; Backend</text>
   <rect x="80" y="430" width="160" height="8" rx="4" fill="url(#accent)"/>
 </svg>
