@@ -2,35 +2,54 @@
 import { profile } from '../data/profile';
 ---
 
-<section id="about" class="scroll-mt-16 py-20">
-  <div class="mx-auto grid max-w-5xl gap-10 px-5 md:grid-cols-[1fr_1.6fr] md:items-start">
-    <!-- Photo placeholder -->
+<section id="about" class="scroll-mt-14 border-b border-line py-24">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.5fr] md:items-start">
     <div class="reveal">
-      <div
-        class="aspect-square w-full max-w-xs rounded-2xl bg-gradient-to-br from-accent-500/20 to-cyan-400/20 ring-1 ring-slate-200 dark:ring-slate-800"
-      >
-        <div class="flex h-full items-center justify-center text-sm text-slate-400 dark:text-slate-500">
-          {/* TODO: add /public/portrait.jpg and replace this block with an <img> */}
-          Your photo here
+      <p class="mono-label mb-4">// about</p>
+      <!-- Photo placeholder — replace with /public/portrait.jpg -->
+      <div class="relative aspect-square w-full max-w-sm border border-line bg-panel">
+        <div class="grid-lines absolute inset-0 opacity-30" aria-hidden="true"></div>
+        <div class="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-wider text-faint uppercase">
+          portrait.jpg
         </div>
+        <span class="absolute bottom-0 left-0 h-3 w-3 bg-lime" aria-hidden="true"></span>
       </div>
     </div>
 
     <div class="reveal">
-      <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">About me</h2>
-      <div class="mt-4 space-y-4 text-slate-600 dark:text-slate-300">
+      <h2 class="display text-4xl text-fg sm:text-5xl">
+        {profile.name}
+      </h2>
+      <div class="mt-6 space-y-4 text-lg leading-relaxed text-muted">
         {profile.bio.map((p) => <p>{p}</p>)}
       </div>
-      <dl class="mt-6 flex flex-wrap gap-x-10 gap-y-3 text-sm">
-        <div>
-          <dt class="font-semibold text-slate-900 dark:text-white">Role</dt>
-          <dd class="text-slate-600 dark:text-slate-300">{profile.role} @ {profile.company}</dd>
+
+      <dl class="mt-8 grid grid-cols-2 gap-px border border-line bg-line">
+        <div class="bg-base px-4 py-3">
+          <dt class="mono-label mb-1">role</dt>
+          <dd class="font-mono text-sm text-fg">{profile.role}</dd>
         </div>
-        <div>
-          <dt class="font-semibold text-slate-900 dark:text-white">Based in</dt>
-          <dd class="text-slate-600 dark:text-slate-300">{profile.location}</dd>
+        <div class="bg-base px-4 py-3">
+          <dt class="mono-label mb-1">company</dt>
+          <dd class="font-mono text-sm text-fg">{profile.company}</dd>
+        </div>
+        <div class="bg-base px-4 py-3">
+          <dt class="mono-label mb-1">based</dt>
+          <dd class="font-mono text-sm text-fg">{profile.location}</dd>
+        </div>
+        <div class="bg-base px-4 py-3">
+          <dt class="mono-label mb-1">education</dt>
+          <dd class="font-mono text-sm text-fg">B.Sc. CSE · DUET</dd>
         </div>
       </dl>
+
+      <a
+        href={profile.cv}
+        download
+        class="mt-8 inline-flex items-center gap-2 border border-line-strong px-5 py-3 font-mono text-xs tracking-wider text-fg uppercase transition-colors hover:border-lime hover:text-lime"
+      >
+        <span aria-hidden="true">▸</span> Download CV
+      </a>
     </div>
   </div>
 </section>

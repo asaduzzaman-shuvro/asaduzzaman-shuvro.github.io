@@ -1,5 +1,6 @@
 ---
 // Self-hosted variable fonts (no render-blocking external request).
+import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
@@ -23,10 +24,11 @@ const ogImage = new URL(image, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
@@ -54,20 +56,11 @@ const ogImage = new URL(image, Astro.site);
       title={`${profile.name} — Blog`}
       href={new URL('rss.xml', Astro.site)}
     />
-
-    <!-- Set theme before paint to avoid a flash -->
-    <script is:inline>
-      (() => {
-        const stored = localStorage.getItem('theme');
-        const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.classList.toggle('dark', dark);
-      })();
-    </script>
   </head>
-  <body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased">
+  <body class="min-h-screen bg-base font-sans text-fg antialiased selection:bg-lime selection:text-black">
     <slot />
 
-    <!-- Scroll-reveal: progressively enhance, respects reduced-motion via CSS -->
+    <!-- Scroll-reveal: progressive enhancement, respects reduced-motion via CSS -->
     <script is:inline>
       (() => {
         const els = document.querySelectorAll('.reveal');
