@@ -1,0 +1,48 @@
+---
+import { experience, education } from '../data/profile';
+---
+
+<section id="experience" class="scroll-mt-14 border-b border-line py-24">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal">
+      <p class="mono-label mb-4">// track record</p>
+      <h2 class="display text-4xl text-fg sm:text-6xl">Experience</h2>
+    </div>
+
+    <ol class="mt-12 border-t border-line">
+      {
+        experience.map((job) => (
+          <li class="reveal grid gap-2 border-b border-line py-8 sm:grid-cols-[10rem_1fr] sm:gap-8">
+            <p class="font-mono text-xs tracking-wider text-faint uppercase">{job.period}</p>
+            <div>
+              <h3 class="display text-xl text-fg sm:text-2xl">{job.role}</h3>
+              <p class="mt-1 font-mono text-sm text-lime">{job.company}</p>
+              <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+                {job.bullets.map((b) => (
+                  <li class="flex gap-3">
+                    <span class="text-faint" aria-hidden="true">▸</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              {job.apps.length > 0 && (
+                <ul class="mt-4 flex flex-wrap gap-2" aria-label="Apps">
+                  {job.apps.map((app) => (
+                    <li class="font-mono text-xs text-faint">#{app}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="reveal mt-8 grid gap-2 font-mono text-xs tracking-wider text-faint uppercase sm:grid-cols-[10rem_1fr] sm:gap-8">
+      <span>{education.year}</span>
+      <span class="normal-case tracking-normal">
+        <span class="text-fg">{education.degree}</span> — {education.school}
+      </span>
+    </p>
+  </div>
+</section>
