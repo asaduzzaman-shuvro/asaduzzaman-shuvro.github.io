@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = 'https://asaduzzaman-shuvro.github.io';
+const SITE = 'https://asaduzzaman.xyz';
 
 // Sitemap <lastmod> for blog URLs. Content collections aren't available at config time, so read
 // the frontmatter directly. Post id = filename without `.md`, matching the glob loader.
