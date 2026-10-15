@@ -6,7 +6,7 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import { getCollection } from 'astro:content';
-import { profile, statements, experience, education, languages } from '../data/profile';
+import { profile, statements, experience, education, languages, interests } from '../data/profile';
 
 const projects = (await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true))
   .sort((a, b) =>
@@ -121,6 +121,10 @@ const title = `${profile.name} — CV`;
         <div>
           <h2>Languages</h2>
           {languages.map((l) => <p><strong>{l.name}</strong> — {l.level}</p>)}
+        </div>
+        <div>
+          <h2>Interests</h2>
+          <p>{interests.join(' · ')}</p>
         </div>
       </section>
     </main>
@@ -325,7 +329,7 @@ const title = `${profile.name} — CV`;
 
   .split {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 24px;
     break-inside: avoid;
   }

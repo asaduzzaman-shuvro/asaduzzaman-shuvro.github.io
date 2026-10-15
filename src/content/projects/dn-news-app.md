@@ -1,14 +1,14 @@
 ---
 title: DN — Norway's business news, on iOS
-summary: The iOS app for Dagens Næringsliv, Norway's leading business daily — a fast, hitch-free news feed for 15.2K daily and 80K weekly readers.
+summary: The iOS app for Dagens Næringsliv, Norway's leading business daily — a fast, hitch-free news feed for 15.2K daily and 90K+ weekly readers.
 type: professional
 role: iOS Team Lead
 teamSize: iOS team at Cefalo, for NHST Media Group
 tech: [Swift, SwiftUI, UIKit, Clean Architecture, Modularization, Fastlane]
 outcomes:
-  - 252K+ downloads, 15.2K daily and 80K weekly active users.
-  - 96% crash-free rate, with an ultra-smooth, hitch-free feed.
-  - Modularization and shared practices cut build and release time by 60%.
+  - 252K+ downloads, 15.2K daily and 90K+ weekly active users.
+  - 99% crash-free rate, with an ultra-smooth, hitch-free feed.
+  - Modularization and shared practices cut release time by 60%.
 links:
   appstore: https://apps.apple.com/app/id1518764819
 order: 10
@@ -31,11 +31,11 @@ for NHST's brands, alongside TradeWinds, Upstream, Europower and Recharge.
 
 - **A feed that never hitches.** Ultra-smooth scrolling and optimized performance, so the
   feed stays seamless however far readers go.
-- **Modular architecture.** Modularization and team-wide best practices cut build and release
-  time by 60%.
-- **Reliability as a feature.** A 96% crash-free rate across a 252K-download install base.
+- **Modular architecture.** Modularization and team-wide best practices cut release time
+  by 60%.
+- **Reliability as a feature.** A 99% crash-free rate across a 252K-download install base.
 
 ## Outcome
 
-252K+ downloads, 15.2K daily and 80K weekly active users, and a 96% crash-free rate — plus a modular codebase
+252K+ downloads, 15.2K daily and 90K+ weekly active users, and a 99% crash-free rate — plus a modular codebase
 and release process that ships 60% faster.

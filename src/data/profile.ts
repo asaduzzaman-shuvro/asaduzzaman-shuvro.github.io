@@ -20,13 +20,13 @@ export const profile = {
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
     'I’m a Staff Software Engineer at Cefalo, leading the iOS and backend teams behind news apps for NHST Media Group — DN, TradeWinds, Upstream and more.',
-    'I spent a decade going deep on iOS — eight production apps, a 252K-download news app at a 96% crash-free rate — then crossed into the backend: Java, Spring and RabbitMQ services moving 100K events a day.',
+    'I spent a decade going deep on iOS — eight production apps, a 252K-download news app at a 99% crash-free rate — then crossed into the backend: Java, Spring and RabbitMQ services moving 100K+ events a day.',
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
   // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
   summary:
-    'Staff Software Engineer who spent a decade specializing in iOS before expanding into backend development, and now leads both. Proven record of shipping fast, reliable apps at scale — including a 252K-download news app at a 96% crash-free rate — and the Java services behind them. Strong in team leadership, architecture, code review and mentoring.',
+    'Staff Software Engineer with an iOS-first background and growing expertise in backend development, building high-performance, reliable applications from end to end. Experienced in technical leadership, code reviews, and mentoring engineers to deliver high-quality results.',
 
   location: 'Dhaka, Bangladesh',
   company: 'Cefalo',
@@ -65,21 +65,21 @@ export const statements = [
     headline: 'Mobile in front.',
     blurb:
       'Native iOS apps from architecture to App Store — feeds that scroll without a hitch, crash-free rates that hold, and security built in from day one.',
-    skills: ['Swift', 'SwiftUI', 'UIKit', 'Clean Architecture', 'Modularization', 'SSL pinning', 'Fastlane'],
+    skills: ['Swift', 'SwiftUI', 'UIKit', 'MVVM', 'Clean Architecture', 'Modularization', 'SSL pinning', 'Encryption', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Charles Proxy'],
   },
   {
     area: 'Backend',
     headline: 'Backend behind it.',
     blurb:
       'The services and integrations that power the apps — event-driven, reliable, and built to handle real traffic.',
-    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs', 'TypeScript', 'Node.js'],
+    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs', 'TypeScript', 'Node.js', 'Git'],
   },
   {
     area: 'Leadership',
     headline: 'A team around it.',
     blurb:
       'Leading iOS and backend engineers from plan to production — architecture standards, stakeholder communication, and code review that levels people up.',
-    skills: ['Team leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Agile delivery', 'OWASP Mobile Top 10'],
+    skills: ['Team leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Agile delivery', 'Cross-functional collaboration', 'OWASP Mobile Top 10'],
   },
 ] as const;
 
@@ -92,7 +92,7 @@ export const experience = [
     bullets: [
       'Lead the iOS and backend teams (5 engineers) — project planning, stakeholder communication, on-time delivery.',
       'Set architecture and engineering standards across iOS (Swift, SwiftUI) and backend (Java, Spring, RabbitMQ).',
-      'Built and run a Java connector between client services and Braze, handling 100K engagement events a day.',
+      'Built and run a Java connector between client services and Braze, handling 100K+ engagement events a day, while still contributing to mobile app features.',
       'Mentor engineers through code reviews and design discussions, with a focus on scalability, security and performance.',
     ],
     apps: ['DN', 'TradeWinds'],
@@ -103,8 +103,8 @@ export const experience = [
     company: 'Cefalo',
     bullets: [
       'Led the iOS team that designed and shipped eight production apps.',
-      'Spearheaded the DN news app — 252K downloads, 15.2K daily / 80K weekly active users, 96% crash-free.',
-      'Introduced modularization and team-wide practices that cut build and release time by 60%.',
+      'Spearheaded the DN news app — 252K downloads, 15.2K daily / 90K+ weekly active users, 99% crash-free.',
+      'Introduced modularization and team-wide practices that cut release time by 60%.',
       'Mentored engineers into senior roles.',
     ],
     apps: ['Europower', 'Upstream', 'Recharge'],
@@ -114,7 +114,7 @@ export const experience = [
     role: 'Software Engineer',
     company: 'Cefalo',
     bullets: [
-      'Built SPENN, a cashless payments app launched in Rwanda and Tanzania.',
+      'Built SPENN, a cashless payments app launched in Rwanda and Tanzania, used by 30K people a week.',
       'Hardened it for finance — encryption, SSL pinning, and data protection against attacks.',
       'Delivered business-critical features end to end within financial regulations.',
     ],
@@ -123,7 +123,7 @@ export const experience = [
   {
     period: '2016 — 2017',
     role: 'Software Engineer',
-    company: 'GagaGugu (Bashundhara Group)',
+    company: 'GagaGugu Ltd',
     bullets: [
       'Built a social app with real-time audio/video calls (WebRTC), a timeline feed, and contact sync.',
       'Shipped a Share Extension for cross-app sharing, and led the sub-team behind the timeline.',
@@ -133,7 +133,7 @@ export const experience = [
   {
     period: '2014 — 2016',
     role: 'Earlier',
-    company: 'Advance Apps · Arena Phone BD · NestedApps',
+    company: 'AdvanceApp Bangladesh · Arena Mobile BD · Nested Apps',
     bullets: [
       'A fishing community and e-commerce app that grew to 50K+ active users, plus real-time shipment tracking.',
       'MyBL for one of Bangladesh’s leading mobile carriers (150K downloads), with key architecture calls.',
@@ -148,6 +148,8 @@ export const education = {
   school: 'Dhaka University of Engineering & Technology (DUET)',
   year: 2014,
 } as const;
+
+export const interests = ['Software engineering', 'Watching cricket', 'Gardening'] as const;
 
 export const languages = [
   { name: 'English', level: 'Full professional' },
