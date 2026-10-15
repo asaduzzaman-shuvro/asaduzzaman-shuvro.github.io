@@ -14,7 +14,7 @@ npm run preview    # preview the production build
 npm run deploy     # build and publish ./dist to the gh-pages branch (GitHub Pages)
 ```
 
-Live at <https://asaduzzaman-shuvro.github.io>. Deploys publish the build to the `gh-pages`
+Live at <https://asaduzzaman.xyz>. Deploys publish the build to the `gh-pages`
 branch (see `scripts/deploy.sh`). To switch to auto-deploy on `git push`, see the
 Deployment notes in `CLAUDE.md`.
 

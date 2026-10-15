@@ -80,7 +80,15 @@ single Vite. Re-test the build before changing or removing it.
 
 ## Deployment
 
-Live at https://asaduzzaman-shuvro.github.io (repo `asaduzzaman-shuvro.github.io`).
+Live at https://asaduzzaman.xyz (repo `asaduzzaman-shuvro.github.io`; the old
+`asaduzzaman-shuvro.github.io` URLs 301 to the custom domain automatically).
+
+**Custom domain.** `public/CNAME` (`asaduzzaman.xyz`) must ship in every build — the deploy
+force-pushes `dist/`, and a `gh-pages` without `CNAME` drops the custom domain from the Pages
+settings. DNS: apex `A` records → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` (plus
+the matching `AAAA` `2606:50c0:8000::153` … `8003::153`), and `www` `CNAME` →
+`asaduzzaman-shuvro.github.io`, which Pages redirects to the apex. "Enforce HTTPS" is on in
+the repo's Pages settings.
 
 **Current method — branch-based** (`npm run deploy`, i.e. `scripts/deploy.sh`): builds and
 force-pushes `dist/` to the `gh-pages` branch, which Pages serves. `dist/.nojekyll` is
@@ -91,14 +99,16 @@ required so the `_astro/` directory isn't stripped by Jekyll. This is used becau
 workflow`, move `docs/deploy-workflow.yml.disabled` back to `.github/workflows/deploy.yml`,
 commit + push, and set the Pages source to "GitHub Actions" in repo settings.
 
-`astro.config.mjs` `site` must match the deployed origin (used for canonical URLs, sitemap,
-and RSS).
+`astro.config.mjs` `SITE` must match the deployed origin (used for canonical URLs, sitemap,
+RSS, JSON-LD, and the host printed on the CV and share card — re-run `npm run og` after
+changing it). `public/robots.txt` repeats it in its `Sitemap:` line.
 
 **Search engines.** Verification tokens go in `seo` in `profile.ts` (empty = no tag rendered).
-Google Search Console: add a *URL-prefix* property for the site origin (a Domain property needs
-DNS, impossible on `github.io`), choose the HTML-tag method, paste the `content` value into
-`seo.googleSiteVerification`, deploy, click Verify, then submit `sitemap-index.xml` under
-Sitemaps. Bing Webmaster Tools: import from Search Console (no token needed), or use its
+Google Search Console: prefer a *Domain* property for `asaduzzaman.xyz`, verified by a DNS
+`TXT` record at the registrar (covers `www` and both schemes, no code change). The fallback is
+a *URL-prefix* property with the HTML-tag method: paste the `content` value into
+`seo.googleSiteVerification` and deploy. Then click Verify and submit `sitemap-index.xml`
+under Sitemaps. Bing Webmaster Tools: import from Search Console (no token needed), or use its
 meta-tag method with `seo.bingSiteVerification`.
 
 ## Generated assets (see `public/README-assets.md`)
