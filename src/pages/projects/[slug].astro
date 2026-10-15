@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { profile } from '../../data/profile';
+import { jsonLd, projectSchema } from '../../data/schema';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true);
@@ -16,6 +18,8 @@ const { project } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
 
+const url = new URL(Astro.url.pathname, Astro.site);
+
 const linkLabels: Record<string, string> = {
   github: 'View on GitHub',
   appstore: 'App Store',
@@ -24,7 +28,8 @@ const linkLabels: Record<string, string> = {
 const links = Object.entries(data.links).filter(([, url]) => Boolean(url)) as [string, string][];
 ---
 
-<Base title={`${data.title} — ${data.role}`} description={data.summary}>
+<Base title={`${data.title} — ${profile.name}`} description={data.summary}>
+  <script is:inline type="application/ld+json" slot="head" set:html={jsonLd(projectSchema(data, url, Astro.site!))} />
   <Header />
   <main class="mx-auto max-w-3xl px-5 pt-28 pb-20">
     <a href="/#work" class="text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">← Back to work</a>

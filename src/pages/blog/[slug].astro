@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { profile, seo } from '../../data/profile';
+import { blogPostingSchema, jsonLd } from '../../data/schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => import.meta.env.PROD ? !data.draft : true);
@@ -16,10 +18,19 @@ const { post } = Astro.props;
 const { data } = post;
 const { Content } = await render(post);
 
+const url = new URL(Astro.url.pathname, Astro.site);
+
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Base title={`${data.title} — Blog`} description={data.description}>
+<Base
+  title={`${data.title} — ${profile.name}`}
+  description={data.description}
+  type="article"
+  publishedTime={data.pubDate}
+  modifiedTime={data.updatedDate}
+>
+  <script is:inline type="application/ld+json" slot="head" set:html={jsonLd(blogPostingSchema(data, url, Astro.site!, seo.ogImage))} />
   <Header />
   <main class="mx-auto max-w-2xl px-5 pt-28 pb-20">
     <a href="/blog/" class="text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">← All posts</a>

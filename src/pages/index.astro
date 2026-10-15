@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -10,9 +11,14 @@ import Experience from '../components/Experience.astro';
 import FieldNotes from '../components/FieldNotes.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
+import portrait from '../assets/portrait.jpg';
+import { homeGraph, jsonLd } from '../data/schema';
+
+const photo = await getImage({ src: portrait, width: 768, format: 'jpg' });
 ---
 
 <Base>
+  <script is:inline type="application/ld+json" slot="head" set:html={jsonLd(homeGraph(Astro.site!, photo.src))} />
   <Header />
   <main>
     <Hero />
