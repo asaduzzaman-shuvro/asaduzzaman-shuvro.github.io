@@ -18,7 +18,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
             <h2 class="display text-4xl text-fg sm:text-6xl">Writing</h2>
           </div>
           <a
-            href="/blog"
+            href="/blog/"
             class="hidden shrink-0 font-mono text-xs tracking-wider text-faint uppercase transition-colors hover:text-lime sm:block"
           >
             All posts →
@@ -29,7 +29,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
           {posts.map((post) => (
             <li class="reveal border-b border-line">
               <a
-                href={`/blog/${post.id}`}
+                href={`/blog/${post.id}/`}
                 class="group grid gap-2 py-6 transition-colors sm:grid-cols-[8rem_1fr] sm:gap-8"
               >
                 <time
@@ -57,7 +57,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month:
         </ul>
 
         <a
-          href="/blog"
+          href="/blog/"
           class="reveal mt-6 inline-block font-mono text-xs tracking-wider text-faint uppercase transition-colors hover:text-lime sm:hidden"
         >
           All posts →

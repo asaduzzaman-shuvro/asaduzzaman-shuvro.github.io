@@ -8,7 +8,7 @@ draft: false
 
 Most "split the bill" apps assume a server in the middle. But on a real trip you're often
 somewhere with no signal — a mountain trail, a foreign SIM you haven't topped up, a
-basement restaurant. So when I built [TripSplit](/projects/tripsplit), I wanted the core
+basement restaurant. So when I built [TripSplit](/projects/tripsplit/), I wanted the core
 experience to work with zero internet, and treat the cloud as a backup rather than a
 requirement.
 
