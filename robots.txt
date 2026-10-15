@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asaduzzaman.xyz/sitemap-index.xml

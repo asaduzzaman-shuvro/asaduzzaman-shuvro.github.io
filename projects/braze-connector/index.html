@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en" class="dark scroll-smooth"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0a0a0b"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.6"><title>Braze engagement connector — A K M Asaduzzaman</title><meta name="description" content="A Java service that connects NHST's client systems to Braze for customer-engagement messaging — 100K+ events a day."><meta name="author" content="A K M Asaduzzaman"><link rel="canonical" href="https://asaduzzaman.xyz/projects/braze-connector/"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="A K M Asaduzzaman"><meta property="og:locale" content="en_US"><meta property="og:title" content="Braze engagement connector — A K M Asaduzzaman"><meta property="og:description" content="A Java service that connects NHST's client systems to Braze for customer-engagement messaging — 100K+ events a day."><meta property="og:url" content="https://asaduzzaman.xyz/projects/braze-connector/"><meta property="og:image" content="https://asaduzzaman.xyz/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="A K M Asaduzzaman — Staff Software Engineer, Mobile &amp; Backend"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Braze engagement connector — A K M Asaduzzaman"><meta name="twitter:description" content="A Java service that connects NHST's client systems to Braze for customer-engagement messaging — 100K+ events a day."><meta name="twitter:image" content="https://asaduzzaman.xyz/og.png"><meta name="twitter:image:alt" content="A K M Asaduzzaman — Staff Software Engineer, Mobile &amp; Backend"><!-- Per-page extras (JSON-LD structured data) --><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Braze engagement connector","description":"A Java service that connects NHST's client systems to Braze for customer-engagement messaging — 100K+ events a day.","url":"https://asaduzzaman.xyz/projects/braze-connector/","keywords":"Java, Spring Boot 3, Braze, REST APIs","author":{"@type":"Person","@id":"https://asaduzzaman.xyz/#person","name":"A K M Asaduzzaman","url":"https://asaduzzaman.xyz/"},"isPartOf":{"@id":"https://asaduzzaman.xyz/#website"}}</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="A K M Asaduzzaman — Blog" href="https://asaduzzaman.xyz/rss.xml"><link rel="stylesheet" href="/_astro/index.CMx9YkG6.css">
+<link rel="stylesheet" href="/_astro/global.C4fVwaTx.css"></head> <body class="min-h-screen bg-base font-sans text-fg antialiased selection:bg-lime selection:text-black">   <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-base/85 backdrop-blur-md"> <nav class="mx-auto flex h-14 max-w-6xl items-center justify-between px-5"> <a href="/" class="font-mono text-sm font-bold tracking-tight text-fg"> shuvro<span class="text-lime">.</span> </a> <!-- Desktop nav --> <ul class="hidden items-center gap-1 sm:flex"> <li> <a href="/#work" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> Work </a> </li><li> <a href="/#stack" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> Stack </a> </li><li> <a href="/#experience" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> Experience </a> </li><li> <a href="/#notes" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> Notes </a> </li><li> <a href="/#about" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> About </a> </li><li> <a href="/#contact" class="px-3 py-2 font-mono text-xs tracking-wider text-muted uppercase transition-colors hover:text-lime"> Contact </a> </li> </ul> <!-- Mobile menu toggle --> <button id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="inline-flex h-9 items-center gap-2 border border-line-strong px-3 font-mono text-xs tracking-wider text-fg uppercase transition-colors hover:border-lime hover:text-lime sm:hidden"> <span id="menu-label">Menu</span> </button> </nav> <!-- Mobile menu panel --> <div id="mobile-menu" hidden class="border-t border-line bg-base/95 backdrop-blur-md sm:hidden"> <ul class="mx-auto flex max-w-6xl flex-col px-5 py-2"> <li class="border-b border-line/60 last:border-0"> <a href="/#work" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> Work </a> </li><li class="border-b border-line/60 last:border-0"> <a href="/#stack" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> Stack </a> </li><li class="border-b border-line/60 last:border-0"> <a href="/#experience" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> Experience </a> </li><li class="border-b border-line/60 last:border-0"> <a href="/#notes" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> Notes </a> </li><li class="border-b border-line/60 last:border-0"> <a href="/#about" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> About </a> </li><li class="border-b border-line/60 last:border-0"> <a href="/#contact" class="block py-3 font-mono text-sm tracking-wider text-fg uppercase transition-colors hover:text-lime"> Contact </a> </li> </ul> </div> </header> <script>
+  (() => {
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const label = document.getElementById('menu-label');
+    if (!toggle || !menu) return;
+
+    const setOpen = (open) => {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (label) label.textContent = open ? 'Close' : 'Menu';
+    };
+
+    toggle.addEventListener('click', () => setOpen(menu.hidden));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) setOpen(false);
+    });
+  })();
+</script> <main class="mx-auto max-w-3xl px-5 pt-28 pb-20"> <a href="/#work" class="text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">← Back to work</a> <header class="mt-6"> <span class="rounded-full bg-accent-50 px-2.5 py-1 text-xs font-semibold text-accent-700 dark:bg-accent-500/10 dark:text-accent-400"> Professional </span> <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Braze engagement connector</h1> <p class="mt-3 text-lg text-slate-600 dark:text-slate-300">A Java service that connects NHST&#39;s client systems to Braze for customer-engagement messaging — 100K+ events a day.</p> </header> <dl class="mt-8 grid grid-cols-2 gap-4 rounded-xl border border-slate-200 p-5 text-sm sm:grid-cols-3 dark:border-slate-800"> <div> <dt class="font-semibold text-slate-900 dark:text-white">Role</dt> <dd class="mt-1 text-slate-600 dark:text-slate-300">Staff Engineer &amp; Team Lead</dd> </div> <div> <dt class="font-semibold text-slate-900 dark:text-white">Team</dt> <dd class="mt-1 text-slate-600 dark:text-slate-300">5 engineers (iOS + backend)</dd> </div> <div class="col-span-2 sm:col-span-1"> <dt class="font-semibold text-slate-900 dark:text-white">Tech</dt> <dd class="mt-1 text-slate-600 dark:text-slate-300">Java, Spring Boot 3, Braze, REST APIs</dd> </div> </dl> <ul class="mt-6 space-y-2"> <li class="flex gap-3 text-slate-700 dark:text-slate-200"> <span class="mt-1 text-accent-500" aria-hidden="true">▸</span> <span>Handles 100K+ customer-engagement events per day.</span> </li><li class="flex gap-3 text-slate-700 dark:text-slate-200"> <span class="mt-1 text-accent-500" aria-hidden="true">▸</span> <span>Bridges client services and Braze, powering push, email and in-app messaging.</span> </li><li class="flex gap-3 text-slate-700 dark:text-slate-200"> <span class="mt-1 text-accent-500" aria-hidden="true">▸</span> <span>Built and run while leading the team and still shipping mobile features.</span> </li> </ul>  <article class="prose prose-slate mt-12 max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-accent-600 dark:prose-a:text-accent-400"> <h2 id="context">Context</h2>
+<p><strong>The problem.</strong> Push notifications, emails and in-app messages only work if Braze knows what
+readers are doing. NHST’s client services held that data, but nothing reliably moved it to
+Braze.</p>
+<h2 id="my-role">My role</h2>
+<p>As Staff Software Engineer I built and maintain the connector, while leading the combined iOS
+and backend team (5 engineers) and setting backend standards for Java, Spring and RabbitMQ.</p>
+<h2 id="technical-highlights">Technical highlights</h2>
+<ul>
+<li><strong>Built for volume.</strong> The connector handles more than 100K events a day.</li>
+<li><strong>Standards first.</strong> It’s built on the Java and Spring standards I set for the team’s backend
+work, alongside RabbitMQ-based services.</li>
+<li><strong>Mobile meets backend.</strong> The same team owns the apps, so I kept contributing mobile
+features while building the connector.</li>
+</ul>
+<h2 id="outcome">Outcome</h2>
+<p>A dependable pipeline at 100K+ events a day that powers NHST’s customer-engagement messaging —
+and a backend codebase with clear standards the team can build on.</p> </article> </main> <footer class="border-t border-slate-200 dark:border-slate-800"> <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row"> <p class="text-sm text-slate-500 dark:text-slate-400">
+© 2026 A K M Asaduzzaman. Built with Astro.
+</p> <ul class="flex items-center gap-4"> <li> <a href="mailto:asaduzzaman.duet@gmail.com" class="text-sm font-medium text-slate-500 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400"> Email </a> </li><li> <a href="https://www.linkedin.com/in/asaduzzamanshuvro/" class="text-sm font-medium text-slate-500 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400" target="_blank" rel="noopener noreferrer"> LinkedIn </a> </li><li> <a href="https://github.com/asaduzzaman-shuvro" class="text-sm font-medium text-slate-500 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400" target="_blank" rel="noopener noreferrer"> GitHub </a> </li> </ul> </div> </footer>  <!-- Scroll-reveal: progressive enhancement, respects reduced-motion via CSS --> <script>
+      (() => {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window) || !els.length) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script> </body> </html>
