@@ -80,20 +80,25 @@ single Vite. Re-test the build before changing or removing it.
 
 ## Deployment
 
-Live at https://asaduzzaman.xyz (repo `asaduzzaman-shuvro.github.io`; the old
-`asaduzzaman-shuvro.github.io` URLs 301 to the custom domain automatically).
+Live at https://asaduzzaman.xyz, **served from cPanel** (Hostever: nameservers
+`dns1`–`dns4.hostever.com`, `A` → the cPanel server). GitHub Pages
+(`asaduzzaman-shuvro.github.io`) is a secondary copy that 301s to the custom domain.
+
+**Publishing to cPanel (the live site):** `npm run zip` (`scripts/cpanel-zip.sh`) re-renders
+the CV + share card, builds, adds an `.htaccess` (404 page; 301 `www`/`http` →
+`https://<domain>`), and zips `dist/` without the Pages-only `CNAME`/`.nojekyll` to
+`~/Downloads/<domain>-site.zip` (or `npm run zip -- <path>`). Upload it to `public_html` in
+File Manager and Extract, overwriting. DNS is edited in cPanel's Zone Editor, which holds the
+Google Search Console `TXT` verification record (keep it) and the SPF `TXT` record.
 
 **Custom domain.** `public/CNAME` (`asaduzzaman.xyz`) is the **only** place the domain is
 written: `astro.config.mjs` derives `SITE` from it (and fails the build if it isn't a bare
-hostname), `src/pages/robots.txt.ts` generates robots from `site`, and `deploy.sh` echoes it.
-To change domains, edit that one file and run `npm run og`. It must also ship in every build —
-the deploy force-pushes `dist/`, and a `gh-pages` without `CNAME` drops the custom domain from
-the Pages settings. DNS: apex `A` records → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` (plus
-the matching `AAAA` `2606:50c0:8000::153` … `8003::153`), and `www` `CNAME` →
-`asaduzzaman-shuvro.github.io`, which Pages redirects to the apex. "Enforce HTTPS" is on in
-the repo's Pages settings.
+hostname), `src/pages/robots.txt.ts` generates robots from `site`, and `deploy.sh` and
+`cpanel-zip.sh` read it. To change domains, edit that one file and run `npm run og`. It must
+also ship in every Pages deploy — `deploy.sh` force-pushes `dist/`, and a `gh-pages` without
+`CNAME` drops the custom domain from the Pages settings.
 
-**Current method — branch-based** (`npm run deploy`, i.e. `scripts/deploy.sh`): builds and
+**GitHub Pages — branch-based** (`npm run deploy`, i.e. `scripts/deploy.sh`): builds and
 force-pushes `dist/` to the `gh-pages` branch, which Pages serves. `dist/.nojekyll` is
 required so the `_astro/` directory isn't stripped by Jekyll. This is used because the local
 `gh` token lacks the `workflow` scope.
