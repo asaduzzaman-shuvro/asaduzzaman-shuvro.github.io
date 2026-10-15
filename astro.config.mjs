@@ -6,7 +6,12 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = 'https://asaduzzaman.xyz';
+// public/CNAME is the one place the domain lives (GitHub Pages needs it in every deploy).
+const host = fs.readFileSync('./public/CNAME', 'utf8').trim();
+if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) {
+  throw new Error(`public/CNAME must hold a bare hostname, got "${host}"`);
+}
+const SITE = `https://${host}`;
 
 // Sitemap <lastmod> for blog URLs. Content collections aren't available at config time, so read
 // the frontmatter directly. Post id = filename without `.md`, matching the glob loader.

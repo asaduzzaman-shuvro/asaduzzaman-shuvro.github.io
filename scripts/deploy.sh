@@ -29,4 +29,4 @@ cp -R dist/. "$WT/"
   git push -f -u origin gh-pages
 )
 git worktree remove --force "$WT"
-echo "✓ Deployed → https://asaduzzaman.xyz/"
+echo "✓ Deployed → https://$(cat public/CNAME)/"
