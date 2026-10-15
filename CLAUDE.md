@@ -13,7 +13,8 @@ built with Astro + Tailwind CSS v4, statically generated and deployed to GitHub 
 npm run dev      # dev server at http://localhost:4321
 npm run build    # static build to ./dist (also runs content sync + type gen)
 npm run preview  # serve the built ./dist locally
-npm run cv       # render the /cv page to public/cv.pdf (headless Chrome; deploy runs it too)
+npm run cv       # render /cv → public/cv.pdf and /og → public/og.png (headless Chrome; deploy runs it)
+npm run og       # same script as `cv` — both assets come from one build
 ```
 
 There is no test suite. The quality gate is the production build plus Lighthouse against
@@ -41,6 +42,15 @@ There is no test suite. The quality gate is the production build plus Lighthouse
 - **`src/layouts/Base.astro`** is the shared shell: meta/OG/Twitter tags, sitemap + RSS
   links, self-hosted font imports, the pre-paint dark-mode script, and the global
   IntersectionObserver that adds `.is-visible` to `.reveal` elements for scroll animations.
+  Props cover `type="article"` (+ `publishedTime`/`modifiedTime`) for blog posts and
+  `noindex`; a `head` slot takes per-page JSON-LD.
+- **Structured data** lives in `src/data/schema.ts` (Person/WebSite on home, BlogPosting,
+  CreativeWork for projects), built from `profile.ts`. Always serialize with its `jsonLd()`
+  (escapes `<`) into `<script is:inline type="application/ld+json" slot="head" set:html=…>`.
+- **Sitemap** (`@astrojs/sitemap` in `astro.config.mjs`): `filter` drops `/og/`; `serialize`
+  adds `<lastmod>` to blog posts (and `/blog/`) by reading their frontmatter with `fs`,
+  since collections aren't available at config time. Drafts are skipped. Pages without a real
+  date get no lastmod — don't invent one.
 
 ## Conventions that matter
 
@@ -54,6 +64,9 @@ There is no test suite. The quality gate is the production build plus Lighthouse
   when adding motion.
 - **Accent color** is exposed as `--color-accent-*` theme tokens; use `text-accent-600`,
   `bg-accent-500`, etc., rather than raw hex.
+- **Internal links end in `/`** (`/blog/`, `/projects/x/`). `trailingSlash: 'always'` in
+  `astro.config.mjs` matches how Pages serves `x/index.html`; a link without the slash costs
+  a 301 in production and 404s in dev. Anchors (`/#work`) and files (`/cv.pdf`) are exempt.
 
 ## Build gotcha (do not remove)
 
@@ -81,16 +94,25 @@ commit + push, and set the Pages source to "GitHub Actions" in repo settings.
 `astro.config.mjs` `site` must match the deployed origin (used for canonical URLs, sitemap,
 and RSS).
 
-## Placeholders to replace (see `public/README-assets.md`)
+**Search engines.** Verification tokens go in `seo` in `profile.ts` (empty = no tag rendered).
+Google Search Console: add a *URL-prefix* property for the site origin (a Domain property needs
+DNS, impossible on `github.io`), choose the HTML-tag method, paste the `content` value into
+`seo.googleSiteVerification`, deploy, click Verify, then submit `sitemap-index.xml` under
+Sitemaps. Bing Webmaster Tools: import from Search Console (no token needed), or use its
+meta-tag method with `seo.bingSiteVerification`.
 
-`public/og.svg` (replace with a 1200×630 PNG).
+## Generated assets (see `public/README-assets.md`)
+
+**The share image is generated.** `src/pages/og.astro` is a 1200×630 brand card (noindex,
+excluded from the sitemap) that `npm run og` screenshots to `public/og.png`, the default
+`og:image` (`seo.ogImage` in `profile.ts`). Edit the page or the data, not the PNG.
 
 The About photo is `src/assets/portrait.jpg` (1200px square crop, EXIF stripped), rendered via
 `astro:assets` `<Image>` so the build emits small WebP variants — don't move it to `public/`.
 
 **The CV is generated, not hand-made.** `src/pages/cv.astro` is a print-styled A4 page built
 from `profile.ts` (summary, experience, skills, education, languages) plus the projects
-collection; `npm run cv` (`scripts/cv-pdf.sh`) prints it to `public/cv.pdf`. Edit the data,
+collection; `npm run cv` (`scripts/render-assets.sh`) prints it to `public/cv.pdf`. Edit the data,
 not the PDF. Keep heading letter-spacing tight on that page — wide tracking makes PDF text
 extractors (and ATS parsers) split words into letters. It deliberately has no phone or
 address.
