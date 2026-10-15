@@ -83,9 +83,12 @@ single Vite. Re-test the build before changing or removing it.
 Live at https://asaduzzaman.xyz (repo `asaduzzaman-shuvro.github.io`; the old
 `asaduzzaman-shuvro.github.io` URLs 301 to the custom domain automatically).
 
-**Custom domain.** `public/CNAME` (`asaduzzaman.xyz`) must ship in every build — the deploy
-force-pushes `dist/`, and a `gh-pages` without `CNAME` drops the custom domain from the Pages
-settings. DNS: apex `A` records → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` (plus
+**Custom domain.** `public/CNAME` (`asaduzzaman.xyz`) is the **only** place the domain is
+written: `astro.config.mjs` derives `SITE` from it (and fails the build if it isn't a bare
+hostname), `src/pages/robots.txt.ts` generates robots from `site`, and `deploy.sh` echoes it.
+To change domains, edit that one file and run `npm run og`. It must also ship in every build —
+the deploy force-pushes `dist/`, and a `gh-pages` without `CNAME` drops the custom domain from
+the Pages settings. DNS: apex `A` records → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` (plus
 the matching `AAAA` `2606:50c0:8000::153` … `8003::153`), and `www` `CNAME` →
 `asaduzzaman-shuvro.github.io`, which Pages redirects to the apex. "Enforce HTTPS" is on in
 the repo's Pages settings.
@@ -99,9 +102,9 @@ required so the `_astro/` directory isn't stripped by Jekyll. This is used becau
 workflow`, move `docs/deploy-workflow.yml.disabled` back to `.github/workflows/deploy.yml`,
 commit + push, and set the Pages source to "GitHub Actions" in repo settings.
 
-`astro.config.mjs` `SITE` must match the deployed origin (used for canonical URLs, sitemap,
-RSS, JSON-LD, and the host printed on the CV and share card — re-run `npm run og` after
-changing it). `public/robots.txt` repeats it in its `Sitemap:` line.
+`SITE` (from `public/CNAME`) is the deployed origin, used for canonical URLs, sitemap, RSS,
+robots, JSON-LD, and the host printed on the CV and share card — re-run `npm run og` after
+changing it.
 
 **Search engines.** Verification tokens go in `seo` in `profile.ts` (empty = no tag rendered).
 Google Search Console: prefer a *Domain* property for `asaduzzaman.xyz`, verified by a DNS
