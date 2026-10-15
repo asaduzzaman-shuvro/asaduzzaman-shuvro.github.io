@@ -1,4 +1,6 @@
 ---
+import { splitFixedCase } from '../data/case';
+
 interface Props {
   index: number;
   title: string;
@@ -29,7 +31,7 @@ const num = String(index).padStart(2, '0');
   </div>
 
   <h3 class="display mt-6 text-2xl text-fg transition-colors group-hover:text-lime sm:text-3xl">
-    {title}
+    {splitFixedCase(title).map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
   </h3>
   <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{summary}</p>
 

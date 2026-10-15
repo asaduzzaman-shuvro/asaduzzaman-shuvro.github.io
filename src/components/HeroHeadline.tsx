@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { splitFixedCase } from '../data/case';
 
 /**
  * Kinetic hero headline — the one React island on the site.
@@ -8,6 +9,10 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
  * reduced motion (first word shown, no animation, no interval timer).
  */
 const WORDS = ['iOS apps', 'backends', 'sync engines', 'teams'] as const;
+
+/** The headline is uppercase; keep brand words like "iOS" in their own case. */
+const word = (text: string) =>
+  splitFixedCase(text).map((part, k) => (k % 2 ? <span key={k} className="normal-case">{part}</span> : part));
 
 export default function HeroHeadline() {
   const reduce = useReducedMotion();
@@ -42,7 +47,7 @@ export default function HeroHeadline() {
 
       <span className="block overflow-hidden text-lime">
         {reduce ? (
-          <span>{WORDS[0]}</span>
+          <span>{word(WORDS[0])}</span>
         ) : (
           <AnimatePresence mode="wait">
             <motion.span
@@ -53,7 +58,7 @@ export default function HeroHeadline() {
               exit={{ opacity: 0, y: '-0.55em' }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
-              {WORDS[i]}
+              {word(WORDS[i])}
             </motion.span>
           </AnimatePresence>
         )}
