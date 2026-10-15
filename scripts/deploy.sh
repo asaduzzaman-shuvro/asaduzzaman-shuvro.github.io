@@ -9,8 +9,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-echo "▶ Rendering CV → public/cv.pdf…"
-bash scripts/cv-pdf.sh
+echo "▶ Rendering CV + share card → public/cv.pdf, public/og.png…"
+bash scripts/render-assets.sh
 
 echo "▶ Building…"
 npm run build

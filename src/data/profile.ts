@@ -45,7 +45,7 @@ export const profile = {
 // Tools → Add site → HTML meta tag (or import from Search Console and skip this one).
 export const seo = {
   // Default 1200×630 social-share image (Base.astro) — also the BlogPosting image.
-  ogImage: '/og.svg',
+  ogImage: '/og.png',
   googleSiteVerification: '',
   bingSiteVerification: '',
 } as const;
