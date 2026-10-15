@@ -1,7 +1,7 @@
 // Single source of truth for personal info.
 
 export const profile = {
-  name: 'Asaduzzaman Shuvro',
+  name: 'A K M Asaduzzaman',
   handle: 'shuvro', // short id used in brutalist mono labels
   role: 'Staff Software Engineer',
   tagline: 'Mobile & Backend',
@@ -11,11 +11,11 @@ export const profile = {
     'I build iOS apps that ship — and the backends that keep them fast, offline or on.',
 
   // Default <title> — role plus the stack people search for.
-  title: 'Asaduzzaman Shuvro — Staff Software Engineer (iOS & Backend)',
+  title: 'A K M Asaduzzaman — Staff Software Engineer (iOS & Backend)',
 
   // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
   metaDescription:
-    'Asaduzzaman Shuvro, Staff Software Engineer in Dhaka. Leads iOS (Swift, SwiftUI) and backend (Java, Spring) teams at Cefalo for NHST Media Group apps.',
+    'A K M Asaduzzaman, Staff Software Engineer in Dhaka. Leads iOS (Swift, SwiftUI) and backend (Java, Spring) teams at Cefalo for NHST Media Group apps.',
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
@@ -34,7 +34,7 @@ export const profile = {
   availability: 'Open to interesting problems',
 
   email: 'asaduzzaman.duet@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/asaduzzaman-shuvro/',
+  linkedin: 'https://www.linkedin.com/in/asaduzzamanshuvro/',
   github: 'https://github.com/asaduzzaman-shuvro',
   // CV lives in /public — a redacted copy of the resume (no phone/address).
   cv: '/cv.pdf',

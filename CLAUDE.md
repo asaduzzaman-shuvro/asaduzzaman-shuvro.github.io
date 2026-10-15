@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal portfolio + blog for Asaduzzaman Shuvro (Staff Software Engineer, Mobile & Backend),
+Personal portfolio + blog for A K M Asaduzzaman (Staff Software Engineer, Mobile & Backend),
 built with Astro + Tailwind CSS v4, statically generated and deployed to GitHub Pages.
 
 ## Commands
