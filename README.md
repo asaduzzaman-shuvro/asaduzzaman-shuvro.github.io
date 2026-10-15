@@ -12,6 +12,7 @@ npm run dev        # local dev server at http://localhost:4321
 npm run build      # production build to ./dist
 npm run preview    # preview the production build
 npm run deploy     # build and publish ./dist to the gh-pages branch (GitHub Pages)
+npm run zip        # build and zip ./dist for cPanel → ~/Downloads/<domain>-site.zip
 ```
 
 Live at <https://asaduzzaman.xyz>. Deploys publish the build to the `gh-pages`

@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "bash scripts/deploy.sh",
+    "zip": "bash scripts/cpanel-zip.sh",
     "cv": "bash scripts/render-assets.sh",
     "og": "bash scripts/render-assets.sh",
     "astro": "astro"
