@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { profile } from '../data/profile';
 
 export async function GET(context) {
-  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  const posts = (await getCollection('blog', ({ data }) => import.meta.env.PROD ? !data.draft : true)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
   );
 
