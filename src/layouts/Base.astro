@@ -4,19 +4,31 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
-import { profile } from '../data/profile';
+import { profile, seo } from '../data/profile';
 
 interface Props {
   title?: string;
   description?: string;
-  /** Path to an OG image relative to site root. */
+  /** Path to a 1200×630 OG image relative to site root. */
   image?: string;
+  imageAlt?: string;
+  /** `article` adds article:published_time / modified_time (blog posts). */
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  /** Keep the page out of search results (404, the /og render target). */
+  noindex?: boolean;
 }
 
 const {
-  title = `${profile.name} — ${profile.role}`,
-  description = profile.pitch,
-  image = '/og.svg',
+  title = profile.title,
+  description = profile.metaDescription,
+  image = seo.ogImage,
+  imageAlt = `${profile.name} — ${profile.role}, ${profile.tagline}`,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -34,20 +46,39 @@ const ogImage = new URL(image, Astro.site);
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {seo.googleSiteVerification && <meta name="google-site-verification" content={seo.googleSiteVerification} />}
+    {seo.bingSiteVerification && <meta name="msvalidate.01" content={seo.bingSiteVerification} />}
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    {type === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime.toISOString()} />
+    )}
+    {type === 'article' && (modifiedTime ?? publishedTime) && (
+      <meta property="article:modified_time" content={(modifiedTime ?? publishedTime)!.toISOString()} />
+    )}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <!-- Per-page extras (JSON-LD structured data) -->
+    <slot name="head" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link

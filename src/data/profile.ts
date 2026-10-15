@@ -10,6 +10,13 @@ export const profile = {
   pitch:
     'I build iOS apps that ship — and the backends that keep them fast, offline or on.',
 
+  // Default <title> — role plus the stack people search for.
+  title: 'Asaduzzaman Shuvro — Staff Software Engineer (iOS & Backend)',
+
+  // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
+  metaDescription:
+    'Asaduzzaman Shuvro, Staff Software Engineer in Dhaka. Leads iOS (Swift, SwiftUI) and backend (Java, Spring) teams at Cefalo for NHST Media Group apps.',
+
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
     'I’m a Staff Software Engineer at Cefalo, leading the iOS and backend teams behind news apps for NHST Media Group — DN, TradeWinds, Upstream and more.',
@@ -31,6 +38,16 @@ export const profile = {
   github: 'https://github.com/asaduzzaman-shuvro',
   // CV lives in /public — a redacted copy of the resume (no phone/address).
   cv: '/cv.pdf',
+} as const;
+
+// Search-engine ownership tokens (the `content` of each verification meta tag). Empty = tag
+// not rendered. Google: Search Console → URL-prefix property → HTML tag. Bing: Webmaster
+// Tools → Add site → HTML meta tag (or import from Search Console and skip this one).
+export const seo = {
+  // Default 1200×630 social-share image (Base.astro) — also the BlogPosting image.
+  ogImage: '/og.svg',
+  googleSiteVerification: '',
+  bingSiteVerification: '',
 } as const;
 
 // The "status strip" — a brutalist system bar of quick facts.
