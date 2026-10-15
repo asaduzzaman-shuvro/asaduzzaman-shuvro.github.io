@@ -87,7 +87,8 @@ Live at https://asaduzzaman.xyz, **served from cPanel** (Hostever: nameservers
 **Publishing to cPanel (the live site):** `npm run zip` (`scripts/cpanel-zip.sh`) re-renders
 the CV + share card, builds, adds an `.htaccess` (404 page; 301 `www`/`http` →
 `https://<domain>`), and zips `dist/` without the Pages-only `CNAME`/`.nojekyll` to
-`~/Downloads/<domain>-site.zip` (or `npm run zip -- <path>`). Upload it to `public_html` in
+`dist/<domain>-site.zip` (or `npm run zip -- <path>`). The next build wipes `dist/`, so the
+zip never reaches a Pages deploy. Upload it to `public_html` in
 File Manager and Extract, overwriting. DNS is edited in cPanel's Zone Editor, which holds the
 Google Search Console `TXT` verification record (keep it) and the SPF `TXT` record.
 

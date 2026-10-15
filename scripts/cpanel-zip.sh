@@ -2,14 +2,14 @@
 # Build the site and package ./dist as a zip for cPanel (Apache): extract it into public_html.
 # Adds an .htaccess (404 page + redirect to https://<domain from public/CNAME>) and leaves out
 # the GitHub Pages-only files (CNAME, .nojekyll).
-#   npm run zip                       → ~/Downloads/<domain>-site.zip
+#   npm run zip                       → dist/<domain>-site.zip
 #   npm run zip -- path/to/out.zip    → custom location
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
 HOST="$(tr -d '[:space:]' < public/CNAME)"
-OUT="${1:-$HOME/Downloads/${HOST//./-}-site.zip}"
+OUT="${1:-dist/${HOST//./-}-site.zip}"
 case "$OUT" in /*) ;; *) OUT="$PWD/$OUT" ;; esac
 
 echo "▶ Rendering CV + share card → public/cv.pdf, public/og.png…"
@@ -33,7 +33,7 @@ EOF
 echo "▶ Zipping dist → ${OUT}…"
 mkdir -p "$(dirname "$OUT")"
 rm -f "$OUT" # zip appends to an existing archive
-(cd dist && zip -qr -X "$OUT" . -x CNAME .nojekyll '*.DS_Store')
+(cd dist && zip -qr -X "$OUT" . -x CNAME .nojekyll '*.DS_Store' '*.zip')
 
 echo "✓ $(unzip -l "$OUT" | tail -1 | awk '{print $2}') files → $OUT"
 echo "  Upload to public_html in cPanel File Manager, then Extract (overwrite)."
