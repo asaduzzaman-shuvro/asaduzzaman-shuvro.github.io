@@ -127,7 +127,7 @@ export const experience = [
     company: 'GagaGugu Ltd',
     bullets: [
       'Built a social app with real-time audio/video calls (WebRTC), a timeline feed, and contact sync.',
-      'Shipped a Share Extension for cross-app sharing, and led the sub-team behind the timeline.',
+      'Shipped a Share Extension for cross-app sharing, and designed the timeline feed (posts and reactions).',
     ],
     apps: [],
   },
@@ -150,11 +150,11 @@ export const education = {
   year: 2014,
 } as const;
 
-export const interests = ['Software engineering', 'Watching cricket', 'Gardening'] as const;
+export const interests = ['Gardening', 'Watching cricket', 'Cycling'] as const;
 
 export const languages = [
-  { name: 'English', level: 'Full professional' },
-  { name: 'Bengali', level: 'Native' },
+  { name: 'English', level: 'Advanced (C1)' },
+  { name: 'Bengali', level: 'Native (C2)' },
 ] as const;
 
 // Social links rendered in the contact section and footer.
