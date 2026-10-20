@@ -20,7 +20,7 @@ export const profile = {
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
     'I’m a Staff Software Engineer at Cefalo, leading the iOS and backend teams behind news apps for NHST Media Group — DN, TradeWinds, Upstream and more.',
-    'I spent a decade going deep on iOS — eight production apps, a 252K-download news app at a 99% crash-free rate — then crossed into the backend: Java, Spring and RabbitMQ services moving 100K+ events a day.',
+    'I spent a decade going deep on iOS — eight production apps, a 290K-download news app at a 99.3% crash-free rate — then crossed into the backend: Java, Spring and RabbitMQ services moving 100K+ events a day.',
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
@@ -103,7 +103,7 @@ export const experience = [
     company: 'Cefalo',
     bullets: [
       'Led the iOS team that designed and shipped eight production apps.',
-      'Spearheaded the DN news app — 252K downloads, 15.2K daily / 90K+ weekly active users, 99% crash-free.',
+      'Spearheaded the DN news app — 290K downloads, 30K+ daily / 200K+ weekly active users, 99.3% crash-free.',
       'Introduced modularization and team-wide practices that cut release time by 60%.',
       'Mentored engineers into senior roles.',
     ],
