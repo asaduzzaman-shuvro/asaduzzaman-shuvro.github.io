@@ -65,7 +65,7 @@ export const statements = [
     headline: 'Mobile in front.',
     blurb:
       'Native iOS apps from architecture to App Store — feeds that scroll without a hitch, crash-free rates that hold, and security built in from day one.',
-    skills: ['Swift', 'SwiftUI', 'UIKit', 'MVVM', 'Clean Architecture', 'Modularization', 'SSL pinning', 'Encryption', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Charles Proxy'],
+    skills: ['Swift', 'SwiftUI', 'UIKit', 'MVVM', 'Clean Architecture', 'Modularization', 'XCTest', 'UI testing', 'SSL pinning', 'Encryption', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Charles Proxy'],
   },
   {
     area: 'Backend',
@@ -79,7 +79,7 @@ export const statements = [
     headline: 'A team around it.',
     blurb:
       'Leading iOS and backend engineers from plan to production — architecture standards, stakeholder communication, and code review that levels people up.',
-    skills: ['Team leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Agile delivery', 'Cross-functional collaboration', 'OWASP Mobile Top 10'],
+    skills: ['Team leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Product discovery', 'Agile delivery', 'Cross-functional collaboration', 'OWASP Mobile Top 10'],
   },
 ] as const;
 
@@ -92,6 +92,7 @@ export const experience = [
     bullets: [
       'Lead the iOS and backend teams (5 engineers) — project planning, stakeholder communication, on-time delivery.',
       'Set architecture and engineering standards across iOS (Swift, SwiftUI) and backend (Java, Spring, RabbitMQ).',
+      'Built and shipped iOS features in Swift and SwiftUI with product and design, from discovery to release — including sign-in and authentication flows and an in-app PDF reader.',
       'Built and run a Java connector between client services and Braze, handling 100K+ engagement events a day, while still contributing to mobile app features.',
       'Mentor engineers through code reviews and design discussions, with a focus on scalability, security and performance.',
     ],
