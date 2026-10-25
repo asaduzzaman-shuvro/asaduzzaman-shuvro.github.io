@@ -151,7 +151,7 @@ export const experience = [
     role: 'Software Engineer',
     company: 'GagaGugu Ltd',
     bullets: [
-      'Built a social app with real-time audio/video calls (WebRTC), a timeline feed, and contact sync.',
+      'Built a social app with real-time audio/video calls (WebRTC), UDP-based messaging, a timeline feed, and contact sync.',
       'Shipped a Share Extension for cross-app sharing, and designed the timeline feed (posts and reactions).',
     ],
     apps: [],
@@ -162,10 +162,11 @@ export const experience = [
     company: 'AdvanceApp Bangladesh · Arena Mobile BD · Nested Apps',
     bullets: [
       'A fishing community and e-commerce app that grew to 50K+ active users, plus real-time shipment tracking.',
-      'MyBL for one of Bangladesh’s leading mobile carriers (150K downloads), with key architecture calls.',
+      'MyBL for Banglalink, one of Bangladesh’s leading mobile carriers (150K downloads), with key architecture calls.',
+      'Kaler Kantho, the news app of a leading Bangladeshi daily, and Shipero for tracking parcels and goods.',
       'A cartoon image maker (100K downloads) with a custom lazy-loading image grid.',
     ],
-    apps: ['MyBL', 'investFeed'],
+    apps: ['MyBL', 'Kaler Kantho', 'Shipero', 'investFeed'],
   },
 ] as const;
 
