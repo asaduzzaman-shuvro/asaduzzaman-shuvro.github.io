@@ -83,7 +83,7 @@ export const statements = [
     headline: 'Mobile in front.',
     blurb:
       'Native iOS apps from architecture to App Store — feeds that scroll without a hitch, crash-free rates that hold, and security built in from day one.',
-    skills: ['Swift', 'SwiftUI', 'UIKit', 'MVVM', 'Clean Architecture', 'Modularization', 'XCTest', 'UI testing', 'SSL pinning', 'Encryption', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Charles Proxy'],
+    skills: ['Swift', 'SwiftUI', 'UIKit', 'Combine', 'Swift Concurrency', 'Objective-C', 'MVVM', 'MVVM-C', 'Clean Architecture', 'Modularization', 'Swift Package Manager', 'XCTest', 'XCUITest', 'Accessibility', 'PDFKit', 'SSL pinning', 'Encryption', 'OWASP Mobile Top 10', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Crashlytics', 'Charles Proxy'],
   },
   {
     area: 'Backend',
@@ -96,8 +96,8 @@ export const statements = [
     area: 'Leadership',
     headline: 'A team around it.',
     blurb:
-      'Leading iOS and backend engineers from plan to production — architecture standards, stakeholder communication, and code review that levels people up.',
-    skills: ['Team leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Product discovery', 'Agile delivery', 'Cross-functional collaboration', 'OWASP Mobile Top 10'],
+      'Leading iOS and backend engineers as a servant leader — clearing the way from plan to production, with architecture standards, stakeholder communication, and code review that levels people up.',
+    skills: ['Team leadership', 'Servant leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Product discovery', 'Agile delivery', 'Cross-functional collaboration'],
   },
 ] as const;
 
