@@ -1,6 +1,7 @@
 // Single source of truth for personal info.
 
 const since = 2014;
+const norwaySince = 2017; // SPENN, then DN Media Group from 2021 — both via Cefalo
 // Computed at build time, so "12 years" doesn't go stale.
 const years = new Date().getFullYear() - since;
 
@@ -19,23 +20,29 @@ export const profile = {
 
   // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
   metaDescription:
-    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka. ${years} years shipping native apps in Swift, SwiftUI and UIKit across media, fintech and social.`,
+    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka, relocating to Norway. ${years} years of Swift, SwiftUI and UIKit; nine years consulting for Norwegian companies.`,
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
-    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo, where I lead the team behind DN Media Group’s news apps (DN, TradeWinds, Upstream and more) while staying hands-on in the code and driving architecture decisions across iOS and backend.`,
-    'I’ve shipped apps across fintech, media and social — a cashless payments startup in Rwanda and Tanzania, a 290K-download news app at a 99.3% crash-free rate. I also own the backend behind them: Java, Spring and RabbitMQ services moving 100K+ events a day.',
+    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer consulting for DN Media Group (via Cefalo), where I lead the team behind its news apps (DN, TradeWinds, Upstream and more) while staying hands-on in the code and driving architecture decisions across iOS and backend.`,
+    `I’ve worked for Norwegian companies since ${norwaySince} — first SPENN, a cashless payments startup in Rwanda and Tanzania, then DN Media Group — with product, design and editorial teams in Oslo, onsite and remote. Along the way: a 290K-download news app at a 99.3% crash-free rate, and the backend behind it, Java, Spring and RabbitMQ services moving 100K+ events a day.`,
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
   // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
   summary:
-    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, while staying hands-on in the code and driving architecture decisions. Has shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
+    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer consulting for DN Media Group via Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, while staying hands-on in the code and driving architecture decisions. Nine years working for Norwegian companies — SPENN from ${norwaySince}, DN Media Group from 2021 — daily with product and design teams in Oslo, including onsite. Has shipped fintech, media and social apps used by hundreds of thousands of people. Writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
 
   location: 'Dhaka, Bangladesh',
-  company: 'Cefalo',
+  // Said in full on the CV, the letter and the meta description; short ("Dhaka → Norway")
+  // elsewhere. Covers the move only — a non-EU hire still needs the employer's permit application.
+  relocation: 'Relocating to Norway, self-funded; open to the Nordics',
+  company: 'Cefalo', // legal employer (JSON-LD worksFor)
+  client: 'DN Media Group', // who the work is for — recruiters know this name, not Cefalo
   since,
-  availability: 'Open to interesting problems',
+  // Contact-section copy.
+  availability:
+    'Open to Staff or Senior iOS roles in Norway and the Nordics — relocating, and already working with Oslo teams every day. The fastest way to reach me is email.',
 
   email: 'asaduzzaman.duet@gmail.com',
   linkedin: 'https://www.linkedin.com/in/asaduzzamanshuvro/',
@@ -72,7 +79,7 @@ export const shippedApps = [
 export const statusItems = [
   { label: 'stack', value: 'Swift · SwiftUI · UIKit' },
   { label: 'shipped for', value: 'Media · Fintech · Social' },
-  { label: 'based', value: profile.location },
+  { label: 'based', value: 'Dhaka → Norway' },
   { label: 'shipping since', value: String(profile.since) },
 ] as const;
 
@@ -113,7 +120,7 @@ export const experience = [
   {
     period: '2025 — now',
     role: 'Staff Software Engineer',
-    company: 'Cefalo',
+    company: 'DN Media Group · consultant via Cefalo',
     bullets: [
       'Lead the iOS and backend teams (5 engineers) — project planning, stakeholder communication, on-time delivery.',
       'Set architecture and engineering standards across iOS (Swift, SwiftUI) and backend (Java, Spring, RabbitMQ).',
@@ -126,7 +133,7 @@ export const experience = [
   {
     period: '2021 — 2025',
     role: 'Senior Software Engineer',
-    company: 'Cefalo',
+    company: 'DN Media Group · consultant via Cefalo',
     bullets: [
       'Led the iOS team that designed and shipped eight production apps.',
       'Spearheaded the DN news app — 290K downloads, 30K+ daily / 200K+ weekly active users, 99.3% crash-free.',
@@ -138,7 +145,7 @@ export const experience = [
   {
     period: '2017 — 2021',
     role: 'Software Engineer',
-    company: 'Cefalo',
+    company: 'SPENN · consultant via Cefalo',
     bullets: [
       'Built SPENN, a cashless payments app launched in Rwanda and Tanzania, used by 30K people a week.',
       'Hardened it for finance — encryption, SSL pinning, and data protection against attacks.',

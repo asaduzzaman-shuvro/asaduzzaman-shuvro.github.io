@@ -3,7 +3,7 @@ title: DN — Norway's business news, on iOS
 summary: The iOS app for Dagens Næringsliv, Norway's leading business daily — a fast, hitch-free news feed for 30K+ daily and 200K+ weekly readers.
 type: professional
 role: iOS Team Lead → Staff Engineer
-teamSize: iOS team at Cefalo, for DN Media Group
+teamSize: DN Media Group’s iOS team, via Cefalo
 tech: [Swift, SwiftUI, UIKit, Clean Architecture, Modularization, Fastlane]
 outcomes:
   - 290K+ downloads, 30K+ daily and 200K+ weekly active users.
@@ -23,8 +23,8 @@ late, or the app crashes mid-article, readers go elsewhere.
 
 ## My role
 
-I led the iOS team at Cefalo building the app for DN Media Group (formerly NHST Media Group),
-owning architecture decisions, code quality, and delivery. DN is the flagship of the
+I led DN Media Group's iOS team (as a consultant via Cefalo) building the app, owning
+architecture decisions, code quality, and delivery. DN is the flagship of the
 [news apps](/#work) the team shipped for the group's brands, alongside TradeWinds, Upstream,
 Fiskeribladet, IntraFish, Recharge and Europower.
 

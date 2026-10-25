@@ -21,7 +21,7 @@ has to be secure, every step has to be clear, and the app has to be there when p
 
 ## My role
 
-As a Software Engineer at Cefalo I built the SPENN iOS app, delivering business-critical
+I built the SPENN iOS app as a consultant to SPENN (via Cefalo), delivering business-critical
 features from start to finish, inside the constraints of financial regulation.
 
 ## Technical highlights
