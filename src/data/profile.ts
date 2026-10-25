@@ -1,36 +1,40 @@
 // Single source of truth for personal info.
 
+const since = 2014;
+// Computed at build time, so "12 years" doesn't go stale.
+const years = new Date().getFullYear() - since;
+
 export const profile = {
   name: 'A K M Asaduzzaman',
   handle: 'shuvro', // short id used in brutalist mono labels
   role: 'Staff Software Engineer',
-  tagline: 'Mobile & Backend',
+  tagline: 'iOS',
 
   // One-line value statement shown in the hero (kept short — it gets set huge).
   pitch:
-    'I build iOS apps that ship — and the backends that keep them fast, offline or on.',
+    'I build iOS apps that ship — eight on the App Store for DN Media Group — and the services behind them.',
 
   // Default <title> — role plus the stack people search for.
-  title: 'A K M Asaduzzaman — Staff Software Engineer (iOS & Backend)',
+  title: 'A K M Asaduzzaman — Staff Software Engineer, iOS (Swift, SwiftUI)',
 
   // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
   metaDescription:
-    'A K M Asaduzzaman, Staff Software Engineer in Dhaka. Leads iOS (Swift, SwiftUI) and backend (Java, Spring) teams at Cefalo for NHST Media Group apps.',
+    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka. ${years} years of Swift, SwiftUI and UIKit; eight DN Media Group apps on the App Store.`,
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
-    'I’m a Staff Software Engineer at Cefalo, leading the iOS and backend teams behind news apps for NHST Media Group — DN, TradeWinds, Upstream and more.',
-    'I spent a decade going deep on iOS — eight production apps, a 290K-download news app at a 99.3% crash-free rate — then crossed into the backend: Java, Spring and RabbitMQ services moving 100K+ events a day.',
+    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo. I led the iOS team behind eight App Store apps for DN Media Group: DN, TradeWinds, Upstream and more.`,
+    'I’ve shipped apps across fintech, media and social — a cashless payments app in Rwanda and Tanzania, a 290K-download news app at a 99.3% crash-free rate. I also own the backend behind them: Java, Spring and RabbitMQ services moving 100K+ events a day.',
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
   // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
   summary:
-    'Staff Software Engineer with an iOS-first background and growing expertise in backend development, building high-performance, reliable applications from end to end. Experienced in technical leadership, code reviews, and mentoring engineers to deliver high-quality results.',
+    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Led the team behind eight production apps for DN Media Group, including a 290K-download news app at a 99.3% crash-free rate, and shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
 
   location: 'Dhaka, Bangladesh',
   company: 'Cefalo',
-  since: 2014,
+  since,
   availability: 'Open to interesting problems',
 
   email: 'asaduzzaman.duet@gmail.com',
@@ -50,10 +54,24 @@ export const seo = {
   bingSiteVerification: '',
 } as const;
 
+// Production iOS apps for DN Media Group (formerly NHST), in release order — the App Store
+// shelf on the home page and the "Apps" line on the CV. Events apps are left out on purpose.
+// `caseStudy` is a projects-collection id; an icon at src/assets/apps/<slug>.png is optional.
+export const shippedApps = [
+  { slug: 'dn', name: 'DN', blurb: 'Norway’s leading business daily', appStore: 'https://apps.apple.com/app/id1518764819', caseStudy: 'dn-news-app' },
+  { slug: 'tradewinds', name: 'TradeWinds', blurb: 'Global shipping news', appStore: 'https://apps.apple.com/app/id1554813945' },
+  { slug: 'upstream', name: 'Upstream', blurb: 'Global oil and gas news', appStore: 'https://apps.apple.com/app/id1566323676' },
+  { slug: 'fiskeribladet', name: 'Fiskeribladet', blurb: 'Norwegian fisheries and aquaculture news', appStore: 'https://apps.apple.com/app/id1573885807' },
+  { slug: 'intrafish', name: 'IntraFish', blurb: 'Global seafood industry news', appStore: 'https://apps.apple.com/app/id1585967329' },
+  { slug: 'recharge', name: 'Recharge', blurb: 'Global renewable energy news', appStore: 'https://apps.apple.com/app/id1587666027' },
+  { slug: 'intrafish-norge', name: 'IntraFish Norge', blurb: 'Seafood industry news, in Norwegian', appStore: 'https://apps.apple.com/app/id1606877205' },
+  { slug: 'europower', name: 'Europower', blurb: 'Nordic power market news', appStore: 'https://apps.apple.com/app/id1620143505' },
+] as const satisfies readonly { slug: string; name: string; blurb: string; appStore: string; caseStudy?: string }[];
+
 // The "status strip" — a brutalist system bar of quick facts.
 export const statusItems = [
-  { label: 'role', value: 'Staff Software Engineer' },
-  { label: 'stack', value: 'Swift · Java · Spring' },
+  { label: 'stack', value: 'Swift · SwiftUI · UIKit' },
+  { label: 'on the app store', value: `${shippedApps.length} apps` },
   { label: 'based', value: profile.location },
   { label: 'shipping since', value: String(profile.since) },
 ] as const;
@@ -72,7 +90,7 @@ export const statements = [
     headline: 'Backend behind it.',
     blurb:
       'The services and integrations that power the apps — event-driven, reliable, and built to handle real traffic.',
-    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs', 'TypeScript', 'Node.js', 'Git'],
+    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs'],
   },
   {
     area: 'Leadership',
@@ -108,7 +126,7 @@ export const experience = [
       'Introduced modularization and team-wide practices that cut release time by 60%.',
       'Mentored engineers into senior roles.',
     ],
-    apps: ['Europower', 'Upstream', 'Recharge'],
+    apps: shippedApps.map((app) => app.name),
   },
   {
     period: '2017 — 2021',

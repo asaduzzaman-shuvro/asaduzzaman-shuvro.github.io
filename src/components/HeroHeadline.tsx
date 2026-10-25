@@ -8,7 +8,7 @@ import { splitFixedCase } from '../data/case';
  * and a cycling middle word. Fully static + accessible when the user prefers
  * reduced motion (first word shown, no animation, no interval timer).
  */
-const WORDS = ['iOS apps', 'backends', 'sync engines', 'teams'] as const;
+const WORDS = ['iOS apps', 'news apps', 'sync engines', 'teams', 'backends'] as const;
 
 /** The headline is uppercase; keep brand words like "iOS" in their own case. */
 const word = (text: string) =>
