@@ -1,5 +1,7 @@
 # Personal working docs (local-only)
 docs/plans/
+# Per-application cover-letter values (company, opening) — never committed
+src/data/letter.local.json
 
 # Build output
 dist/

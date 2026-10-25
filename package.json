@@ -11,6 +11,7 @@
     "zip": "bash scripts/cpanel-zip.sh",
     "cv": "bash scripts/render-assets.sh",
     "og": "bash scripts/render-assets.sh",
+    "letter": "bash scripts/render-letter.sh",
     "astro": "astro"
   },
   "dependencies": {

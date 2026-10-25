@@ -44,8 +44,8 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     sitemap({
-      // /og/ is the share-card render target, not a page.
-      filter: (page) => page !== `${SITE}/og/`,
+      // /og/ is the share-card render target and /letter/ the cover-letter one, not pages.
+      filter: (page) => ![`${SITE}/og/`, `${SITE}/letter/`].includes(page),
       serialize(item) {
         const lastmod = lastmods.get(item.url);
         return lastmod ? { ...item, lastmod: lastmod.toISOString() } : item;

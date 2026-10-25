@@ -1,0 +1,110 @@
+---
+// Personal application letter, printed to PDF by `npm run letter` (scripts/render-letter.sh).
+// Never deployed: without LETTER=1 the page returns an empty 204, and Astro writes no file
+// for an empty body, so plain builds (npm run zip / deploy) have no dist/letter/. (A 404 status
+// would make Astro render the custom 404 page there instead.) It is also filtered from the
+// sitemap in astro.config.mjs. To preview it in dev: `LETTER=1 npm run dev`.
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/paper.css';
+import { profile, experience } from '../data/profile';
+import { letterDefaults, type LetterInput } from '../data/letter';
+
+// process.env, not import.meta.env: only PUBLIC_* shell vars reach import.meta.env.
+if (!process.env.LETTER) return new Response(null, { status: 204 });
+
+// Per-application values live in a gitignored file next to letter.ts. import.meta.glob resolves
+// it at build time and yields {} when the file is absent (a URL relative to import.meta.url
+// would point at the bundled chunk, not src/, and silently miss it).
+const localFiles = import.meta.glob<Partial<LetterInput>>('../data/letter.local.json', { eager: true, import: 'default' });
+const local = localFiles['../data/letter.local.json'] ?? {};
+const letter: LetterInput = { ...letterDefaults, ...local };
+
+const site = Astro.site!;
+const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const years = new Date().getFullYear() - profile.since;
+const teamSize = experience[0].bullets[0].match(/\((\d+) engineers\)/)?.[1] ?? 'five';
+
+const paragraphs = [
+  `I’m writing to apply for the ${letter.role} role at ${letter.company}. ${letter.opening}`.trim(),
+
+  `I’m an iOS engineer with ${years} years in Swift, SwiftUI and UIKit, currently a Staff Software Engineer consulting for DN Media Group via Cefalo. I lead the team behind DN Media Group’s news apps — DN, TradeWinds, Upstream and more — while staying hands-on in the code and driving architecture decisions across iOS and backend. DN is Norway’s leading business daily: 290K downloads, 200K+ weekly readers, 99.3% crash-free. The modularization I introduced cut the team’s release time by 60%.`,
+
+  `I have worked for Norwegian companies since 2017 — first SPENN, a Norwegian fintech startup with a payments app in Rwanda and Tanzania, then DN Media Group — with product, design and editorial teams in Oslo every day, across four to five hours of shared working time, and onsite in Norway. [TODO: when, for how long, which team.] I know how Norwegian teams make decisions and ship, and I work well in that culture.`,
+
+  `On location: I’m based in Dhaka, and I plan to relocate to Norway at my own cost if given the opportunity; the wider Nordics are also an option. I understand the employer’s part is the skilled-worker application, and I will have my side of the paperwork ready. [TODO: notice period and earliest start.]`,
+
+  `On how I work: I build the AI tooling my team uses, not just use it — custom code-review agents, and a team plugin for tickets, QA notes and branch hygiene, built on Claude Code and used by the team every day; I also work in Codex and Cursor. Agents take the first pass; engineering judgment and human review decide what ships. [TODO: one measured effect — review time, throughput, or defects caught.]`,
+
+  `As a staff-level engineer I measure myself by what the team of ${teamSize} ships without me on the critical path: architecture standards across iOS and backend, code review that teaches, and mentoring — several engineers I’ve mentored have moved into senior roles. [TODO: one concrete mentoring story — what I did, what changed.]`,
+
+  `I’d welcome a conversation about ${letter.company}. My CV is attached, and the case studies and apps are at ${strip(site.href)}.`,
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{profile.name} — Application letter</title>
+  </head>
+  <body>
+    <nav class="toolbar" aria-label="Letter actions">
+      <a href="/">← Back to site</a>
+      <a href="/cv/">CV</a>
+    </nav>
+
+    <main class="page">
+      <header class="head">
+        <h1>{profile.name}<span class="dot" aria-hidden="true"></span></h1>
+        <p class="role">{profile.role} · {profile.tagline}</p>
+        <ul class="contacts">
+          <li>{profile.location} · {profile.relocation}</li>
+          <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+          <li><a href={profile.linkedin}>{strip(profile.linkedin)}</a></li>
+          <li><a href={site.href}>{strip(site.href)}</a></li>
+        </ul>
+      </header>
+
+      <section class="letter">
+        <p class="meta">{date}</p>
+        <p class="meta">{letter.company} · {letter.role}</p>
+        <p class="greeting">{letter.greeting}</p>
+        {paragraphs.map((text) => <p class="body">{text}</p>)}
+        <p class="signoff">Kind regards,</p>
+        <p class="signature">{profile.name}</p>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  .letter {
+    margin-top: 18px;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+  .meta {
+    color: var(--muted);
+    font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
+    font-size: 8.5pt;
+  }
+  .greeting {
+    margin-top: 16px;
+  }
+  .body {
+    margin-top: 10px;
+  }
+  .signoff {
+    margin-top: 18px;
+  }
+  .signature {
+    margin-top: 4px;
+    font-weight: 700;
+  }
+</style>

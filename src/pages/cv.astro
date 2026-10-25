@@ -1,10 +1,10 @@
 ---
 // Printable résumé, generated from the same data as the site. `npm run cv` prints it to
-// public/cv.pdf. Light-on-white on purpose: it is made for paper and ATS parsers, not the
-// dark brand canvas, so it skips Base.astro and global.css.
+// public/cv.pdf. Shares the paper styles with /letter (src/styles/paper.css).
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
+import '../styles/paper.css';
 import { getCollection } from 'astro:content';
 import { profile, statements, experience, education, languages, interests } from '../data/profile';
 import { sortProjects } from '../data/projects';
@@ -130,114 +130,6 @@ const title = `${profile.name} — CV`;
 </html>
 
 <style is:global>
-  :root {
-    --ink: #111113;
-    --muted: #4b4b55;
-    --rule: #d9d9de;
-    --accent: #c6ff00;
-    --paper-bg: #e9e9ec;
-    color-scheme: light;
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    margin: 0;
-  }
-  body {
-    background: var(--paper-bg);
-    color: var(--ink);
-    font-family: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
-    font-size: 10pt;
-    line-height: 1.45;
-    -webkit-font-smoothing: antialiased;
-  }
-  a {
-    color: inherit;
-    text-decoration-color: var(--rule);
-    text-underline-offset: 2px;
-  }
-  a:hover {
-    text-decoration-color: var(--ink);
-  }
-
-  .toolbar {
-    display: flex;
-    justify-content: space-between;
-    max-width: 210mm;
-    margin: 0 auto;
-    padding: 16px;
-    font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-  }
-  .toolbar a {
-    text-decoration: none;
-  }
-
-  .page {
-    max-width: 210mm;
-    margin: 0 auto 48px;
-    padding: 16mm 16mm 18mm;
-    background: #fff;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
-  }
-
-  .head {
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--ink);
-  }
-  h1 {
-    margin: 0;
-    font-family: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, sans-serif;
-    font-size: 26pt;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .dot {
-    display: inline-block;
-    width: 0.32em;
-    height: 0.32em;
-    margin-left: 0.08em;
-    background: var(--accent);
-    outline: 1px solid var(--ink);
-  }
-  .role {
-    margin: 6px 0 0;
-    font-size: 12pt;
-    font-weight: 600;
-  }
-  .contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px 14px;
-    margin: 8px 0 0;
-    padding: 0;
-    list-style: none;
-    color: var(--muted);
-    font-size: 9pt;
-  }
-
-  section {
-    margin-top: 14px;
-  }
-  h2 {
-    margin: 0 0 6px;
-    font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
-    font-size: 8.5pt;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  p {
-    margin: 0;
-  }
-
   .job {
     padding: 8px 0;
     border-top: 1px solid var(--rule);
@@ -332,12 +224,7 @@ const title = `${profile.name} — CV`;
     break-inside: avoid;
   }
 
-  /* Phones: let the sheet go edge to edge. */
   @media (max-width: 640px) {
-    .page {
-      padding: 20px 16px;
-      box-shadow: none;
-    }
     .job-head,
     .split {
       display: block;
@@ -350,39 +237,10 @@ const title = `${profile.name} — CV`;
       gap: 0;
     }
   }
-
-  /* Comfortable tap targets on screen; print keeps the tight layout. */
   @media screen {
-    .contacts {
-      row-gap: 4px;
-    }
-    .contacts a,
-    .toolbar a,
     .project-head a {
       display: inline-block;
       padding: 4px 0;
-    }
-  }
-
-  @page {
-    size: A4;
-    margin: 14mm 16mm;
-  }
-  @media print {
-    body {
-      background: #fff;
-    }
-    .toolbar {
-      display: none;
-    }
-    .page {
-      max-width: none;
-      margin: 0;
-      box-shadow: none;
-      padding: 0;
-    }
-    a {
-      text-decoration: none;
     }
   }
 </style>
