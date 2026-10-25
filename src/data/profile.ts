@@ -90,7 +90,7 @@ export const statements = [
     headline: 'Mobile in front.',
     blurb:
       'Native iOS apps from architecture to App Store — feeds that scroll without a hitch, crash-free rates that hold, and security built in from day one.',
-    skills: ['Swift', 'SwiftUI', 'UIKit', 'Combine', 'Swift Concurrency', 'Objective-C', 'MVVM', 'MVVM-C', 'Clean Architecture', 'Modularization', 'Swift Package Manager', 'XCTest', 'XCUITest', 'Accessibility', 'PDFKit', 'SSL pinning', 'Encryption', 'OWASP Mobile Top 10', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Crashlytics', 'Charles Proxy'],
+    skills: ['Swift', 'Swift 6', 'SwiftUI', 'UIKit', 'Liquid Glass (iOS 26)', 'Combine', 'Swift Concurrency', 'Observation', 'SwiftData', 'Objective-C', 'MVVM', 'MVVM-C', 'Clean Architecture', 'Modularization', 'Swift Package Manager', 'XCTest', 'XCUITest', 'Accessibility', 'PDFKit', 'SSL pinning', 'Encryption', 'OWASP Mobile Top 10', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Crashlytics', 'Charles Proxy'],
   },
   {
     area: 'Backend',
@@ -110,7 +110,7 @@ export const statements = [
     area: 'AI',
     headline: 'AI in the loop.',
     blurb:
-      'Shipping faster with AI coding agents — Claude Code, Codex, Cursor and others for building, reviewing and refactoring, with engineering judgment and human review kept in charge.',
+      'I build the tooling, not just use it — custom review agents, and a team plugin for tickets, QA notes and branches, built on Claude Code and used by the team every day. I also work in Codex and Cursor. Engineering judgment and human review stay in charge.',
     skills: ['Claude Code', 'Codex', 'Cursor', 'AI-assisted development', 'AI code review', 'Agentic workflows'],
   },
 ] as const;
