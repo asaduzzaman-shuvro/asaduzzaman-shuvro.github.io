@@ -12,25 +12,25 @@ export const profile = {
 
   // One-line value statement shown in the hero (kept short — it gets set huge).
   pitch:
-    'I build iOS apps that ship — eight on the App Store for DN Media Group — and the services behind them.',
+    'I build iOS apps that ship — news, fintech and social — and the services behind them.',
 
   // Default <title> — role plus the stack people search for.
   title: 'A K M Asaduzzaman — Staff Software Engineer, iOS (Swift, SwiftUI)',
 
   // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
   metaDescription:
-    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka. ${years} years of Swift, SwiftUI and UIKit; eight DN Media Group apps on the App Store.`,
+    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka. ${years} years shipping native apps in Swift, SwiftUI and UIKit across media, fintech and social.`,
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
-    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo. I led the iOS team behind eight App Store apps for DN Media Group: DN, TradeWinds, Upstream and more.`,
+    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo, where I lead the team behind DN Media Group’s news apps: DN, TradeWinds, Upstream and more.`,
     'I’ve shipped apps across fintech, media and social — a cashless payments app in Rwanda and Tanzania, a 290K-download news app at a 99.3% crash-free rate. I also own the backend behind them: Java, Spring and RabbitMQ services moving 100K+ events a day.',
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
   // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
   summary:
-    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Led the team behind eight production apps for DN Media Group, including a 290K-download news app at a 99.3% crash-free rate, and shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
+    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, and shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
 
   location: 'Dhaka, Bangladesh',
   company: 'Cefalo',
@@ -71,7 +71,7 @@ export const shippedApps = [
 // The "status strip" — a brutalist system bar of quick facts.
 export const statusItems = [
   { label: 'stack', value: 'Swift · SwiftUI · UIKit' },
-  { label: 'on the app store', value: `${shippedApps.length} apps` },
+  { label: 'shipped for', value: 'Media · Fintech · Social' },
   { label: 'based', value: profile.location },
   { label: 'shipping since', value: String(profile.since) },
 ] as const;

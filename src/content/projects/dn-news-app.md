@@ -25,8 +25,8 @@ late, or the app crashes mid-article, readers go elsewhere.
 
 I led the iOS team at Cefalo building the app for DN Media Group (formerly NHST Media Group),
 owning architecture decisions, code quality, and delivery. DN is the flagship of the
-[eight production apps](/#work) the team shipped for the group's brands, alongside TradeWinds,
-Upstream, Fiskeribladet, IntraFish, Recharge and Europower.
+[news apps](/#work) the team shipped for the group's brands, alongside TradeWinds, Upstream,
+Fiskeribladet, IntraFish, Recharge and Europower.
 
 As Staff Software Engineer I still build on it: Swift and SwiftUI features shipped with product
 and design from discovery to release.
