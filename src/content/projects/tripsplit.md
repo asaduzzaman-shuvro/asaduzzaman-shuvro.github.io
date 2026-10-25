@@ -10,7 +10,7 @@ outcomes:
   - Clean MVVM architecture — Models, Services, ViewModels, and Views cleanly separated.
 links:
   github: https://github.com/asaduzzaman-shuvro/TripSplitter
-order: 1
+order: 3
 draft: false
 ---
 
@@ -38,4 +38,4 @@ The codebase follows a strict MVVM split: `Models/` (pure data), `Services/`
 `ViewModels/`, and `Views/`. Utilities like the settlement calculator and invite-code
 generator are isolated and unit-test-friendly.
 
-<!-- TODO: add screenshots to src/content/projects/ and reference them in `gallery`. -->
+<!-- TODO: add screenshots under src/content/projects/tripsplit/ and reference them in `cover` and `gallery`. -->

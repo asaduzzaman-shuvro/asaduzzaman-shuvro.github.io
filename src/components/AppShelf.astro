@@ -1,0 +1,64 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { shippedApps } from '../data/profile';
+
+// Optional icons at src/assets/apps/<slug>.png (1024px AppIcon exports). A missing icon falls
+// back to a monogram tile, so the shelf never waits on assets.
+const icons = import.meta.glob<{ default: ImageMetadata }>('../assets/apps/*.png', { eager: true });
+const iconFor = (slug: string) => icons[`../assets/apps/${slug}.png`]?.default;
+const monogram = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2);
+---
+
+<div class="reveal mt-14">
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+    <p class="mono-label">// on the app store</p>
+    <p class="text-sm text-muted">{shippedApps.length} production apps for DN Media Group, built by the iOS team I led.</p>
+  </div>
+
+  <ul class="mt-6 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
+    {
+      shippedApps.map((app) => {
+        const icon = iconFor(app.slug);
+        const caseStudy = 'caseStudy' in app ? app.caseStudy : undefined;
+        return (
+          <li class="flex flex-col bg-panel p-5">
+            {icon ? (
+              <Image src={icon} alt="" width={96} height={96} class="h-12 w-12 rounded-[22%]" />
+            ) : (
+              <span
+                class="display flex h-12 w-12 items-center justify-center rounded-[22%] border border-line-strong text-lg text-lime"
+                aria-hidden="true"
+              >
+                {monogram(app.name)}
+              </span>
+            )}
+            <h3 class="mt-4 font-display text-lg font-semibold text-fg">{app.name}</h3>
+            <p class="mt-1 flex-1 text-sm leading-snug text-muted">{app.blurb}</p>
+            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs tracking-wider uppercase">
+              <a
+                href={app.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-faint transition-colors hover:text-lime focus-visible:text-lime"
+              >
+                App Store <span aria-hidden="true">↗</span>
+                <span class="sr-only">— {app.name} (opens in a new tab)</span>
+              </a>
+              {caseStudy && (
+                <a href={`/projects/${caseStudy}/`} class="text-lime hover:underline">
+                  Case study <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

@@ -1,15 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
+import AppShelf from './AppShelf.astro';
 import ProjectCard from './ProjectCard.astro';
+import { sortProjects } from '../data/projects';
 
-const all = await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true);
-
-// Professional first, then by `order`.
-const typeRank = { professional: 0, 'open-source': 1 } as const;
-const projects = all.sort((a, b) => {
-  const t = typeRank[a.data.type] - typeRank[b.data.type];
-  return t !== 0 ? t : a.data.order - b.data.order;
-});
+const projects = sortProjects(await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true));
 ---
 
 <section id="work" class="scroll-mt-14 border-b border-line py-24">
@@ -24,7 +19,10 @@ const projects = all.sort((a, b) => {
       </p>
     </div>
 
-    <div class="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2">
+    <AppShelf />
+
+    <p class="reveal mono-label mt-16">// case studies</p>
+    <div class="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2">
       {
         projects.map((p, i) => (
           <ProjectCard
@@ -34,6 +32,8 @@ const projects = all.sort((a, b) => {
             type={p.data.type}
             tech={p.data.tech}
             href={`/projects/${p.id}/`}
+            cover={p.data.cover}
+            featured={i === 0}
           />
         ))
       }

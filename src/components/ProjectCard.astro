@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import { splitFixedCase } from '../data/case';
 
 interface Props {
@@ -8,15 +10,23 @@ interface Props {
   type: 'professional' | 'open-source';
   tech: string[];
   href: string;
+  cover?: { src: ImageMetadata; alt: string };
+  /** Spans both grid columns, with the cover screenshot beside the text. */
+  featured?: boolean;
 }
-const { index, title, summary, type, tech, href } = Astro.props;
+const { index, title, summary, type, tech, href, cover, featured = false } = Astro.props;
 const typeLabel = type === 'professional' ? 'Professional' : 'Open source';
 const num = String(index).padStart(2, '0');
 ---
 
 <a
   href={href}
-  class="group reveal relative flex flex-col bg-panel p-7 outline-2 outline-offset-[-2px] outline-transparent transition-[outline-color,color] hover:outline-lime focus-visible:outline-lime"
+  class:list={[
+    // a card left alone on the last row (featured takes row one) spans it too
+    'group reveal relative flex flex-col bg-panel p-7 sm:even:last:col-span-2 outline-2 outline-offset-[-2px] outline-transparent transition-[outline-color,color] hover:outline-lime focus-visible:outline-lime',
+    // py-20 keeps the cover clear of the index number in the top-right corner
+    featured && 'sm:col-span-2 sm:flex-row sm:items-center sm:gap-10 sm:py-20',
+  ]}
 >
   <!-- big index number, brutalist -->
   <span
@@ -26,27 +36,60 @@ const num = String(index).padStart(2, '0');
     {num}
   </span>
 
-  <div class="flex items-center gap-2">
-    <span class="mono-label text-lime">{typeLabel}</span>
+  {
+    cover && !featured && (
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        widths={[400, 800]}
+        sizes="(min-width: 640px) 50vw, 100vw"
+        class="mb-6 aspect-[4/3] w-full border border-line object-cover object-top"
+      />
+    )
+  }
+
+  <div class="flex flex-1 flex-col">
+    <div class="flex items-center gap-2">
+      <span class="mono-label text-lime">{typeLabel}</span>
+    </div>
+
+    <h3
+      class:list={[
+        'display mt-6 text-2xl text-fg transition-colors group-hover:text-lime',
+        featured ? 'sm:text-5xl' : 'sm:text-3xl',
+      ]}
+    >
+      {splitFixedCase(title).map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
+    </h3>
+    <p class:list={['mt-3 flex-1 text-sm leading-relaxed text-muted', featured && 'sm:max-w-xl sm:text-[1rem]']}>
+      {summary}
+    </p>
+
+    <ul class="mt-6 flex flex-wrap gap-2">
+      {
+        tech.slice(0, 5).map((t) => (
+          <li class="border border-line px-2 py-1 font-mono text-xs text-faint">{t}</li>
+        ))
+      }
+    </ul>
+
+    <span
+      class="mt-6 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-faint uppercase transition-colors group-hover:text-lime"
+    >
+      Read case study
+      <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+    </span>
   </div>
 
-  <h3 class="display mt-6 text-2xl text-fg transition-colors group-hover:text-lime sm:text-3xl">
-    {splitFixedCase(title).map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
-  </h3>
-  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{summary}</p>
-
-  <ul class="mt-6 flex flex-wrap gap-2">
-    {
-      tech.slice(0, 5).map((t) => (
-        <li class="border border-line px-2 py-1 font-mono text-xs text-faint">{t}</li>
-      ))
-    }
-  </ul>
-
-  <span
-    class="mt-6 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-faint uppercase transition-colors group-hover:text-lime"
-  >
-    Read case study
-    <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-  </span>
+  {
+    cover && featured && (
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        widths={[240, 480]}
+        sizes="240px"
+        class="mt-8 w-full max-w-60 self-center rounded-[2rem] border border-line sm:mt-0 sm:w-60 sm:shrink-0"
+      />
+    )
+  }
 </a>
