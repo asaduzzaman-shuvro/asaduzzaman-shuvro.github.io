@@ -9,7 +9,11 @@ import { getCollection } from 'astro:content';
 import { profile, statements, experience, education, languages, interests } from '../data/profile';
 import { sortProjects } from '../data/projects';
 
-const projects = sortProjects(await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true));
+// Two pages is the norm for a Norwegian CV; cap Selected work so the PDF never spills to three.
+const CV_PROJECTS = 4;
+const projects = sortProjects(
+  await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true)
+).slice(0, CV_PROJECTS);
 
 const site = Astro.site!;
 const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
@@ -45,7 +49,7 @@ const title = `${profile.name} — CV`;
         <h1>{profile.name}<span class="dot" aria-hidden="true"></span></h1>
         <p class="role">{profile.role} · {profile.tagline}</p>
         <ul class="contacts">
-          <li>{profile.location}</li>
+          <li>{profile.location} · {profile.relocation}</li>
           {contacts.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
         </ul>
       </header>
