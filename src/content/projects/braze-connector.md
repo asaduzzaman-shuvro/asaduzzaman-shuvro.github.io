@@ -1,6 +1,6 @@
 ---
 title: Braze engagement connector
-summary: A Java service that connects NHST's client systems to Braze for customer-engagement messaging — 100K+ events a day.
+summary: A Java service that connects DN Media Group's client systems to Braze for customer-engagement messaging — 100K+ events a day.
 type: professional
 role: Staff Engineer & Team Lead
 teamSize: 5 engineers (iOS + backend)
@@ -10,14 +10,14 @@ outcomes:
   - Bridges client services and Braze, powering push, email and in-app messaging.
   - Built and run while leading the team and still shipping mobile features.
 links: {}
-order: 11
+order: 4
 draft: false
 ---
 
 ## Context
 
 **The problem.** Push notifications, emails and in-app messages only work if Braze knows what
-readers are doing. NHST's client services held that data, but nothing reliably moved it to
+readers are doing. DN Media Group's client services held that data, but nothing reliably moved it to
 Braze.
 
 ## My role
@@ -35,5 +35,5 @@ and backend team (5 engineers) and setting backend standards for Java, Spring an
 
 ## Outcome
 
-A dependable pipeline at 100K+ events a day that powers NHST's customer-engagement messaging —
+A dependable pipeline at 100K+ events a day that powers DN Media Group's customer-engagement messaging —
 and a backend codebase with clear standards the team can build on.
