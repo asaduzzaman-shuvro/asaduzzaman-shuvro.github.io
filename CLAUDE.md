@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal portfolio + blog for A K M Asaduzzaman (Staff Software Engineer, Mobile & Backend),
-built with Astro + Tailwind CSS v4, statically generated and deployed to GitHub Pages.
+Personal portfolio + blog for A K M Asaduzzaman (Staff Software Engineer, positioned iOS-first
+with backend as a secondary strength), built with Astro + Tailwind CSS v4, statically generated
+and deployed to GitHub Pages.
 
 ## Commands
 
@@ -24,13 +25,16 @@ There is no test suite. The quality gate is the production build plus Lighthouse
 ## Architecture
 
 - **`src/data/profile.ts` is the single source of truth** for all personal data — name,
-  bio, contact, social links, and the contextual skill groups. Components and layouts
-  import from here; do not hardcode personal info in components.
+  bio, contact, social links, the contextual skill groups, and `shippedApps` (the App Store
+  shelf in `AppShelf.astro`; optional icons at `src/assets/apps/<slug>.png`, else a monogram).
+  Components and layouts import from here; do not hardcode personal info in components.
 - **Content is markdown collections, not components.** `src/content.config.ts` defines two
   collections via the glob loader:
-  - `projects/` — case studies. `type` (`professional` | `open-source`) controls sort
-    order (professional first, then by `order`). `links` is an object with optional
-    `github`/`appstore`/`live` URLs.
+  - `projects/` — case studies, sorted by `order` alone via `sortProjects()` in
+    `src/data/projects.ts` (home grid and CV), so iOS work leads; the first card is
+    featured. `type` (`professional` | `open-source`) is only a label. `links` is an object
+    with optional `github`/`appstore`/`live` URLs. `cover` and `gallery` are `{ src, alt }`
+    images relative to the entry (`./<slug>/feed.png`), optimized by `astro:assets`.
   - `blog/` — posts, sorted by `pubDate` descending.
   Both schemas have a `draft` boolean. **Draft filtering is environment-based**: every
   `getCollection` call filters with `import.meta.env.PROD ? !data.draft : true`, so drafts
@@ -64,6 +68,8 @@ There is no test suite. The quality gate is the production build plus Lighthouse
   when adding motion.
 - **Accent color** is exposed as `--color-accent-*` theme tokens; use `text-accent-600`,
   `bg-accent-500`, etc., rather than raw hex.
+- **`text-base` is a color, not a size.** The `--color-base` token makes `text-base` paint
+  text in the page background (invisible). Use `text-[1rem]` for 16px type.
 - **Internal links end in `/`** (`/blog/`, `/projects/x/`). `trailingSlash: 'always'` in
   `astro.config.mjs` matches how Pages serves `x/index.html`; a link without the slash costs
   a 301 in production and 404s in dev. Anchors (`/#work`) and files (`/cv.pdf`) are exempt.
@@ -138,8 +144,8 @@ address.
 
 Work history lives in `experience` in `profile.ts` (years only — the resume and LinkedIn
 disagree on exact months). The professional case studies (`dn-news-app.md`,
-`braze-connector.md`) name NHST Media Group clients publicly; keep claims to what the resume
-states.
+`braze-connector.md`, `spenn.md`) name DN Media Group (formerly NHST Media Group) and SPENN
+publicly; keep claims to what the resume states.
 
 ## Working docs
 
