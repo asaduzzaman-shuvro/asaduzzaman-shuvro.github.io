@@ -16,6 +16,7 @@ npm run build    # static build to ./dist (also runs content sync + type gen)
 npm run preview  # serve the built ./dist locally
 npm run cv       # render /cv → public/cv.pdf and /og → public/og.png (headless Chrome; deploy runs it)
 npm run og       # same script as `cv` — both assets come from one build
+npm run letter   # render /letter → ~/Downloads/…Cover letter.pdf (never into public/; see below)
 ```
 
 There is no test suite. The quality gate is the production build plus Lighthouse against
@@ -32,9 +33,11 @@ There is no test suite. The quality gate is the production build plus Lighthouse
   collections via the glob loader:
   - `projects/` — case studies, sorted by `order` alone via `sortProjects()` in
     `src/data/projects.ts` (home grid and CV), so iOS work leads; the first card is
-    featured. `type` (`professional` | `open-source`) is only a label. `links` is an object
-    with optional `github`/`appstore`/`live` URLs. `cover` and `gallery` are `{ src, alt }`
-    images relative to the entry (`./<slug>/feed.png`), optimized by `astro:assets`.
+    featured. The CV shows only the top 4 (`CV_PROJECTS` in `cv.astro`) so it stays at two
+    pages, the Norwegian norm. `type` (`professional` | `open-source`) is only a label.
+    `links` is an object with optional `github`/`appstore`/`live` URLs. `cover` and `gallery`
+    are `{ src, alt }` images relative to the entry (`./<slug>/feed.png`), optimized by
+    `astro:assets`.
   - `blog/` — posts, sorted by `pubDate` descending.
   Both schemas have a `draft` boolean. **Draft filtering is environment-based**: every
   `getCollection` call filters with `import.meta.env.PROD ? !data.draft : true`, so drafts
@@ -140,12 +143,28 @@ from `profile.ts` (summary, experience, skills, education, languages) plus the p
 collection; `npm run cv` (`scripts/render-assets.sh`) prints it to `public/cv.pdf`. Edit the data,
 not the PDF. Keep heading letter-spacing tight on that page — wide tracking makes PDF text
 extractors (and ATS parsers) split words into letters. It deliberately has no phone or
-address.
+address. The paper styles it shares with `/letter` live in `src/styles/paper.css`.
+
+**The application letter is generated too, and never deployed.** `src/pages/letter.astro`
+returns an empty 204 unless `LETTER=1`, so a plain build writes no `dist/letter/` (a 404 would
+render the custom 404 page there instead); it is also filtered from the sitemap. Per-application
+values (company, role, greeting, opening) come from `src/data/letter.local.json`, which is
+**gitignored because this repo is public** — only `letter.ts` defaults are committed.
+`npm run letter` (`scripts/render-letter.sh`) builds with `LETTER=1`, prints to `~/Downloads`,
+then rebuilds plain so `dist/` is clean. Body paragraphs carry `[TODO …]` markers for facts
+still to be filled in.
 
 Work history lives in `experience` in `profile.ts` (years only — the resume and LinkedIn
-disagree on exact months). The professional case studies (`dn-news-app.md`,
-`braze-connector.md`, `spenn.md`) name DN Media Group (formerly NHST Media Group) and SPENN
-publicly; keep claims to what the resume states.
+disagree on exact months). **Lead with the client, not the employer:** the user is a consultant
+to DN Media Group (earlier SPENN) employed by Cefalo, so experience lines, bio, summary and case
+studies read "DN Media Group · consultant via Cefalo" — a Norwegian recruiter knows DN, not
+Cefalo. **Never write NHST in public text** (the group's former name; a code comment may keep
+it). Relocation is said in full (`profile.relocation`) on the CV, the letter and the meta
+description, and short ("Dhaka → Norway") elsewhere; it covers the move only and never implies
+the employer has no permit work. Keep claims to what the resume states or what the user has
+answered in writing in `docs/plans/` (gitignored); new case studies stay `draft: true` until
+signed off. When describing the AI tooling, name capabilities, never internal system, vendor or
+client-infra names — those identify the client's stack, not the user's skill.
 
 ## Working docs
 
