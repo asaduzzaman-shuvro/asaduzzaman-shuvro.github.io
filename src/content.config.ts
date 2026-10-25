@@ -3,7 +3,8 @@ import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.object({
+  // Images are paths relative to the entry, e.g. `./dn-news-app/feed.png` (see `gallery`).
+  schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),
     type: z.enum(['professional', 'open-source']),
@@ -18,8 +19,8 @@ const projects = defineCollection({
         live: z.string().url().optional(),
       })
       .default({}),
-    cover: z.string().optional(),
-    gallery: z.array(z.string()).default([]),
+    cover: z.object({ src: image(), alt: z.string() }).optional(),
+    gallery: z.array(z.object({ src: image(), alt: z.string() })).default([]),
     order: z.number().default(99),
     draft: z.boolean().default(false),
   }),

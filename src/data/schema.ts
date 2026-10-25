@@ -86,7 +86,7 @@ interface ProjectData {
   tech: readonly string[];
 }
 
-export function projectSchema(project: ProjectData, url: URL, site: URL) {
+export function projectSchema(project: ProjectData, url: URL, site: URL, image?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -94,6 +94,7 @@ export function projectSchema(project: ProjectData, url: URL, site: URL) {
     description: project.summary,
     url: url.href,
     ...(project.tech.length > 0 && { keywords: project.tech.join(', ') }),
+    ...(image && { image: new URL(image, site).href }),
     author: personRef(site),
     isPartOf: { '@id': websiteId(site) },
   };

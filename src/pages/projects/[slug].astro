@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -19,6 +20,7 @@ const { data } = project;
 const { Content } = await render(project);
 
 const url = new URL(Astro.url.pathname, Astro.site);
+const coverImage = data.cover && (await getImage({ src: data.cover.src, width: 1200, format: 'jpg' })).src;
 
 const linkLabels: Record<string, string> = {
   github: 'View on GitHub',
@@ -29,7 +31,7 @@ const links = Object.entries(data.links).filter(([, url]) => Boolean(url)) as [s
 ---
 
 <Base title={`${data.title} — ${profile.name}`} description={data.summary}>
-  <script is:inline type="application/ld+json" slot="head" set:html={jsonLd(projectSchema(data, url, Astro.site!))} />
+  <script is:inline type="application/ld+json" slot="head" set:html={jsonLd(projectSchema(data, url, Astro.site!, coverImage))} />
   <Header />
   <main class="mx-auto max-w-3xl px-5 pt-28 pb-20">
     <a href="/#work" class="text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">← Back to work</a>
@@ -83,6 +85,26 @@ const links = Object.entries(data.links).filter(([, url]) => Boolean(url)) as [s
           </a>
         ))}
       </div>
+    )}
+
+    {data.gallery.length > 0 && (
+      <ul
+        class="-mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4"
+        aria-label="Screenshots"
+        tabindex="0"
+      >
+        {data.gallery.map((shot) => (
+          <li class="w-56 shrink-0 snap-start">
+            <Image
+              src={shot.src}
+              alt={shot.alt}
+              widths={[224, 448]}
+              sizes="224px"
+              class="w-full rounded-[1.75rem] border border-slate-200 dark:border-slate-800"
+            />
+          </li>
+        ))}
+      </ul>
     )}
 
     <article class="prose prose-slate mt-12 max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-accent-600 dark:prose-a:text-accent-400">
