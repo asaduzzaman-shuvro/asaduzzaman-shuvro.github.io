@@ -99,6 +99,13 @@ export const statements = [
       'Leading iOS and backend engineers as a servant leader — clearing the way from plan to production, with architecture standards, stakeholder communication, and code review that levels people up.',
     skills: ['Team leadership', 'Servant leadership', 'Mentoring', 'Code review', 'Stakeholder communication', 'Product discovery', 'Agile delivery', 'Cross-functional collaboration'],
   },
+  {
+    area: 'AI',
+    headline: 'AI in the loop.',
+    blurb:
+      'Shipping faster with AI coding agents — Claude Code, Codex, Cursor and others for building, reviewing and refactoring, with engineering judgment and human review kept in charge.',
+    skills: ['Claude Code', 'Codex', 'Cursor', 'AI-assisted development', 'AI code review', 'Agentic workflows'],
+  },
 ] as const;
 
 // Condensed work history for the Experience section. Years only — keep it scannable.
