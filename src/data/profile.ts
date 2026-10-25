@@ -23,14 +23,14 @@ export const profile = {
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
-    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo, where I lead the team behind DN Media Group’s news apps: DN, TradeWinds, Upstream and more.`,
-    'I’ve shipped apps across fintech, media and social — a cashless payments app in Rwanda and Tanzania, a 290K-download news app at a 99.3% crash-free rate. I also own the backend behind them: Java, Spring and RabbitMQ services moving 100K+ events a day.',
+    `I’m an iOS engineer with ${years} years of Swift, SwiftUI and UIKit — now a Staff Software Engineer at Cefalo, where I lead the team behind DN Media Group’s news apps (DN, TradeWinds, Upstream and more) while staying hands-on in the code and driving architecture decisions across iOS and backend.`,
+    'I’ve shipped apps across fintech, media and social — a cashless payments startup in Rwanda and Tanzania, a 290K-download news app at a 99.3% crash-free rate. I also own the backend behind them: Java, Spring and RabbitMQ services moving 100K+ events a day.',
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
   // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
   summary:
-    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, and shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
+    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer at Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, while staying hands-on in the code and driving architecture decisions. Has shipped fintech, media and social apps used by hundreds of thousands of people. Works closely with product and design, writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
 
   location: 'Dhaka, Bangladesh',
   company: 'Cefalo',
