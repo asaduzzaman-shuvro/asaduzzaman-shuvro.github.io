@@ -20,7 +20,7 @@ export const profile = {
 
   // Default <meta name="description"> (~150 chars) — the pitch is too short for search snippets.
   metaDescription:
-    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka, relocating to Norway. ${years} years of Swift, SwiftUI and UIKit; nine years consulting for Norwegian companies.`,
+    `A K M Asaduzzaman, Staff Software Engineer (iOS) in Dhaka, relocating to Europe. ${years} years of Swift, SwiftUI and UIKit; nine years consulting for Norwegian companies.`,
 
   // Slightly longer bio for the About section. Punchy, first-person.
   bio: [
@@ -34,15 +34,17 @@ export const profile = {
     `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer consulting for DN Media Group via Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, while staying hands-on in the code and driving architecture decisions. Nine years working for Norwegian companies — SPENN from ${norwaySince}, DN Media Group from 2021 — daily with product and design teams in Oslo, including onsite. Has shipped fintech, media and social apps used by hundreds of thousands of people. Writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
 
   location: 'Dhaka, Bangladesh',
-  // Said in full on the CV, the letter and the meta description; short ("Dhaka → Norway")
-  // elsewhere. Covers the move only — a non-EU hire still needs the employer's permit application.
-  relocation: 'Relocating to Norway, self-funded; open to the Nordics',
+  // Printed on the CV and letter headers — documents one employer reads — so it names no country
+  // and ranks none. The site is where "Norway first, open to the Nordics and Central Europe"
+  // lives (`availability`); the strip and About say "Dhaka → Europe". Covers the move only — a
+  // non-EU hire still needs the employer's permit application.
+  relocation: 'Relocating to Europe, self-funded',
   company: 'Cefalo', // legal employer (JSON-LD worksFor)
   client: 'DN Media Group', // who the work is for — recruiters know this name, not Cefalo
   since,
   // Contact-section copy.
   availability:
-    'Open to Staff or Senior iOS roles in Norway and the Nordics — relocating, and already working with Oslo teams every day. The fastest way to reach me is email.',
+    'Open to Staff or Senior iOS roles in Europe — Norway first, and open to the Nordics and Central Europe — relocating, and already working with Oslo teams every day. The fastest way to reach me is email.',
 
   email: 'asaduzzaman.duet@gmail.com',
   linkedin: 'https://www.linkedin.com/in/asaduzzamanshuvro/',
@@ -79,7 +81,7 @@ export const shippedApps = [
 export const statusItems = [
   { label: 'stack', value: 'Swift · SwiftUI · UIKit' },
   { label: 'shipped for', value: 'Media · Fintech · Social' },
-  { label: 'based', value: 'Dhaka → Norway' },
+  { label: 'based', value: 'Dhaka → Europe' },
   { label: 'shipping since', value: String(profile.since) },
 ] as const;
 

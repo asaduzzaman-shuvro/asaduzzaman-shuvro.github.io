@@ -155,13 +155,18 @@ values (company, role, greeting, opening) come from `src/data/letter.local.json`
 then rebuilds plain so `dist/` is clean. Body paragraphs carry `[TODO …]` markers for facts
 still to be filled in.
 
-Work history lives in `experience` in `profile.ts` (years only — the resume and LinkedIn
-disagree on exact months). **Lead with the client, not the employer:** the user is a consultant
+Work history lives in `experience` in `profile.ts` (years only; month-level dates live on the
+resume and LinkedIn, aligned to the resume on 2026-10-28). **Lead with the client, not the
+employer:** the user is a consultant
 to DN Media Group (earlier SPENN) employed by Cefalo, so experience lines, bio, summary and case
 studies read "DN Media Group · consultant via Cefalo" — a Norwegian recruiter knows DN, not
 Cefalo. **Never write NHST in public text** (the group's former name; a code comment may keep
-it). Relocation is said in full (`profile.relocation`) on the CV, the letter and the meta
-description, and short ("Dhaka → Norway") elsewhere; it covers the move only and never implies
+it). **Relocation, by audience.** The target is Europe: Norway first, then the Nordics and
+Central Europe. The site, read by many, says so (`profile.availability`, meta description) and
+shortens it to "Dhaka → Europe" in the strip and About. The CV and letter headers print
+`profile.relocation` ("Relocating to Europe, self-funded"), which names no country and ranks
+none, because one employer reads them; the letter body names that employer's country from
+`country` in the gitignored `letter.local.json`. It covers the move only and never implies
 the employer has no permit work. Keep claims to what the resume states or what the user has
 answered in writing in `docs/plans/` (gitignored); new case studies stay `draft: true` until
 signed off. When describing the AI tooling, name capabilities, never internal system, vendor or
