@@ -1,0 +1,63 @@
+---
+// LinkedIn banner, 1584×396. Not a page for people: `npm run banner` (scripts/render-banner.sh)
+// screenshots it to ~/Downloads/linkedin-banner.png with headless Chrome. Nothing lands in
+// public/ — the banner is uploaded to LinkedIn by hand. Like og.astro it skips Base.astro, is
+// noindex, and is filtered out of the sitemap in astro.config.mjs.
+//
+// Layout: on LinkedIn's desktop profile the round photo covers the bottom-left of the banner,
+// so every line of text stays in the right two-thirds.
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { splitFixedCase } from '../data/case';
+
+const host = Astro.site!.host;
+// `.display` is uppercase; brand words ("iOS") keep their case via splitFixedCase, as in og.astro.
+const label = splitFixedCase(profile.tagline);
+const pitch = splitFixedCase(profile.pitch);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1584" />
+    <meta name="robots" content="noindex" />
+    <title>{profile.name} — LinkedIn banner</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1584px;
+        height: 396px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="bg-base text-fg">
+    <main class="relative flex h-[396px] w-[1584px] flex-col justify-between overflow-hidden py-[44px] pr-[72px] pl-[560px]">
+      <div class="grid-lines pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"></div>
+      <div
+        class="pointer-events-none absolute -top-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-lime/10 blur-[120px]"
+        aria-hidden="true"
+      >
+      </div>
+
+      <p class="relative flex items-center gap-3 font-mono text-[20px] tracking-[0.18em] text-muted uppercase">
+        <span class="inline-block h-4 w-4 bg-lime"></span>
+        {profile.role} · {label.map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
+      </p>
+
+      <p class="display relative text-[52px] leading-[1.08] text-fg">
+        {pitch.map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
+      </p>
+
+      <p class="relative flex items-center justify-between gap-8 font-mono text-[20px] tracking-wider text-faint">
+        <span>{profile.relocation}</span>
+        <span class="flex items-center gap-3">{host}<span class="h-4 w-4 bg-lime" aria-hidden="true"></span></span>
+      </p>
+    </main>
+  </body>
+</html>

@@ -2,3 +2,4 @@
 
 - **`cv.pdf`** — generated from the `/cv` page by `npm run cv` (and on every `npm run deploy`). Don't replace it by hand; edit `src/data/profile.ts` instead.
 - **`og.png`** — 1200×630 social-share image, screenshotted from the `/og` page (`src/pages/og.astro`) by `npm run og` (same script as `npm run cv`, and run on every deploy). Change the page or `src/data/profile.ts`, then re-render.
+- **LinkedIn banner** — not stored here. `npm run banner` screenshots the `/banner` page (`src/pages/banner.astro`, 1584×396) to `~/Downloads/linkedin-banner.png`; upload it to LinkedIn by hand.

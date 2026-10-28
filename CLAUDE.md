@@ -17,6 +17,7 @@ npm run preview  # serve the built ./dist locally
 npm run cv       # render /cv → public/cv.pdf and /og → public/og.png (headless Chrome; deploy runs it)
 npm run og       # same script as `cv` — both assets come from one build
 npm run letter   # render /letter → ~/Downloads/…Cover letter.pdf (never into public/; see below)
+npm run banner   # render /banner → ~/Downloads/linkedin-banner.png (1584×396 LinkedIn banner; never into public/)
 ```
 
 There is no test suite. The quality gate is the production build plus Lighthouse against

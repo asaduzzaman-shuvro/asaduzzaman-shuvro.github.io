@@ -12,6 +12,7 @@
     "cv": "bash scripts/render-assets.sh",
     "og": "bash scripts/render-assets.sh",
     "letter": "bash scripts/render-letter.sh",
+    "banner": "bash scripts/render-banner.sh",
     "astro": "astro"
   },
   "dependencies": {
