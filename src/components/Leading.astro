@@ -1,0 +1,47 @@
+---
+import { leadership, statements } from '../data/profile';
+
+// The leadership skill group lives in `statements` (the CV's Skills rows read it); shown here
+// instead of in "What I do".
+const skills = statements.find((s) => s.area === 'Leadership')?.skills ?? [];
+---
+
+<section id="leading" class="scroll-mt-14 border-b border-line py-24">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-16">
+      <div>
+        <p class="kicker mb-4"><span class="folio mr-2 text-[1rem] normal-case">02</span>Leading</p>
+        <h2 class="display text-4xl text-fg sm:text-6xl">A team <em>around</em> the apps.</h2>
+      </div>
+      <p class="self-end text-lg leading-relaxed text-muted sm:text-xl">{leadership.scope}</p>
+    </div>
+
+    <div class="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+      {
+        leadership.columns.map((col) => (
+          <div class="reveal bg-panel p-7">
+            <h3 class="font-display text-2xl text-fg">{col.title}</h3>
+            <ul class="mt-5 space-y-4">
+              {col.points.map((p) => (
+                <li class="flex gap-3 text-[0.95rem] leading-relaxed text-muted">
+                  <span class="mt-2.5 h-px w-4 shrink-0 bg-accent-600" aria-hidden="true" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      skills.length > 0 && (
+        <ul class="reveal mt-8 flex flex-wrap gap-2" aria-label="Leadership skills">
+          {skills.map((s) => (
+            <li class="rounded-full border border-line px-3 py-1 text-xs text-muted">{s}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>

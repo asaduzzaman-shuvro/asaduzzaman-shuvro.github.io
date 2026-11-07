@@ -1,41 +1,36 @@
 ---
-import { profile } from '../data/profile';
-import { splitFixedCase } from '../data/case';
-import HeroHeadline from './HeroHeadline.tsx';
+import { profile, hero } from '../data/profile';
 ---
 
-<section id="top" class="relative overflow-hidden border-b border-line">
-  <!-- blueprint grid backdrop -->
-  <div class="grid-lines pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"></div>
-  <!-- soft lime glow -->
-  <div
-    class="pointer-events-none absolute -top-40 -left-40 h-[34rem] w-[34rem] rounded-full bg-lime/10 blur-[120px]"
-    aria-hidden="true"
-  >
-  </div>
+<section id="top" class="relative">
+  <div class="mx-auto max-w-6xl px-5 pt-32 pb-16 sm:pt-40 sm:pb-20">
+    <p class="kicker mb-8">{hero.kicker}</p>
 
-  <div class="relative mx-auto max-w-6xl px-5 pt-32 pb-20 sm:pt-40 sm:pb-28">
-    <p class="mono-label mb-6 flex items-center gap-2">
-      {profile.role} · {splitFixedCase(profile.tagline).map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
-    </p>
+    <h1 class="display max-w-5xl text-[clamp(2.75rem,8.2vw,6.75rem)] text-fg">
+      {hero.headline.before}<em>{hero.headline.em}</em>{hero.headline.after}
+    </h1>
 
-    <HeroHeadline client:load />
+    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">{hero.lead}</p>
 
-    <p class="mt-8 max-w-2xl text-lg text-muted sm:text-xl">{profile.pitch}</p>
-
-    <div class="mt-10 flex flex-wrap items-center gap-4">
+    <div class="mt-10 flex flex-wrap items-center gap-3">
       <a
         href="#work"
-        class="group inline-flex items-center gap-2 border border-lime bg-lime px-6 py-3 font-mono text-sm font-semibold tracking-wide text-black uppercase transition-transform hover:-translate-y-0.5"
+        class="inline-flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-sm font-semibold text-base transition-transform hover:-translate-y-0.5"
       >
-        <span aria-hidden="true">▸</span> See the work
+        See the work <span aria-hidden="true">→</span>
       </a>
       <a
-        href="#contact"
-        class="group inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-sm font-semibold tracking-wide text-fg uppercase transition-colors hover:border-lime hover:text-lime"
+        href={profile.cv}
+        download
+        class="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-fg transition-colors hover:border-accent-600 hover:text-accent-600"
       >
-        <span aria-hidden="true">▸</span> Get in touch
+        Download CV <span aria-hidden="true">↓</span>
       </a>
     </div>
+
+    <p class="mt-8 flex max-w-2xl items-start gap-3 text-sm leading-relaxed text-muted">
+      <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent-600" aria-hidden="true"></span>
+      <span>{profile.availability}</span>
+    </p>
   </div>
 </section>

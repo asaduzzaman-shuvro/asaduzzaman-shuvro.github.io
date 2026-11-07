@@ -92,13 +92,54 @@ export const shippedApps = [
   { slug: 'europower', name: 'Europower', blurb: 'Nordic power market news', appStore: 'https://apps.apple.com/app/id1620143505' },
 ] as const satisfies readonly { slug: string; name: string; blurb: string; appStore: string; caseStudy?: string }[];
 
-// The "status strip" — a brutalist system bar of quick facts.
-export const statusItems = [
-  { label: 'stack', value: 'Swift · SwiftUI · UIKit' },
-  { label: 'shipped for', value: 'Media · Fintech · Social' },
-  { label: 'based', value: 'Dhaka → Europe' },
-  { label: 'shipping since', value: String(profile.since) },
+// Hero copy. The headline names both tracks (hands-on iOS + leading the team); `em` is set in
+// italic accent. The lead says who the work is for, client first.
+export const hero = {
+  kicker: `${profile.role} · iOS · Dhaka → Europe`,
+  headline: { before: 'I build iOS apps, ', em: 'and lead the team', after: ' that ships them.' },
+  lead:
+    'Staff Software Engineer for DN Media Group, consultant via Cefalo. Hands-on in Swift and SwiftUI across eight news apps and the Java services behind them, and leading the five-engineer iOS and backend team that builds them.',
+} as const;
+
+// The numbers strip under the app shelf. Static figures, each with what it counts — no
+// animated counters. The 290K downloads are the DN app's alone, never the eight apps' total.
+export const numbers = [
+  { value: '8', label: 'news apps on the App Store', note: 'DN Media Group' },
+  { value: '5', label: 'engineers led', note: 'iOS and backend' },
+  { value: '60%', label: 'faster releases', note: 'after modularization' },
+  { value: '99.3%', label: 'crash-free', note: 'DN app · 290K downloads' },
 ] as const;
+
+// The "Leading" section: a scope line, then outcomes in three columns. Only facts already
+// stated in the experience bullets or the bio — no invented cadences, roadmaps or headcounts.
+export const leadership = {
+  scope:
+    'I lead DN Media Group’s five-engineer iOS and backend team as a consultant via Cefalo: eight news apps on iOS and the Java and Spring Boot services behind them. I stay hands-on in the code.',
+  columns: [
+    {
+      title: 'People',
+      points: [
+        'Mentoring through code review that has moved several engineers into senior roles.',
+        'Built the team’s AI tooling on Claude Code, from review agents to a tickets-to-branches plugin, used daily by all five engineers.',
+      ],
+    },
+    {
+      title: 'Delivery',
+      points: [
+        'Introduced modularization with clear module ownership: release time cut by 60%, with five engineers shipping in parallel.',
+        'Own the testing standard: unit, integration and XCUITest flows run on every pull request.',
+      ],
+    },
+    {
+      title: 'Planning & collaboration',
+      points: [
+        'Plan and ship features with product and design, from discovery to release.',
+        'Set the architecture and engineering standards across Swift and SwiftUI, and Java and Spring Boot.',
+        `${new Date().getFullYear() - norwaySince} years working every day with Norwegian product, design and editorial teams in Oslo.`,
+      ],
+    },
+  ],
+} as const;
 
 // "What I do" — three bold statements, not a logo grid. Each carries a skill group.
 export const statements = [

@@ -4,7 +4,9 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
+import AppShelf from '../components/AppShelf.astro';
 import StatusStrip from '../components/StatusStrip.astro';
+import Leading from '../components/Leading.astro';
 import Projects from '../components/Projects.astro';
 import WhatIDo from '../components/WhatIDo.astro';
 import Experience from '../components/Experience.astro';
@@ -22,8 +24,10 @@ const photo = await getImage({ src: portrait, width: 768, format: 'jpg' });
   <Header />
   <main>
     <Hero />
+    <AppShelf />
     <StatusStrip />
     <Projects />
+    <Leading />
     <WhatIDo />
     <Experience />
     <FieldNotes />

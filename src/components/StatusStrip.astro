@@ -1,17 +1,25 @@
 ---
-import { statusItems } from '../data/profile';
+import { numbers } from '../data/profile';
 ---
 
-<section
-  aria-label="At a glance"
-  class="border-b border-line bg-panel/40"
->
-  <dl class="mx-auto grid max-w-6xl grid-cols-2 divide-line sm:grid-cols-4 sm:divide-x">
+<!-- The numbers strip: static figures, each with what it counts. -->
+<section aria-label="At a glance" class="border-b border-line">
+  <dl class="mx-auto grid max-w-6xl grid-cols-2 px-5 lg:grid-cols-4">
     {
-      statusItems.map((item) => (
-        <div class="border-b border-line px-5 py-4 sm:border-b-0">
-          <dt class="mono-label mb-1">{item.label}</dt>
-          <dd class="font-mono text-sm text-fg">{item.value}</dd>
+      numbers.map((n, i) => (
+        <div
+          class:list={[
+            'reveal flex flex-col py-8 lg:px-6 lg:first:pl-0',
+            i % 2 === 1 && 'pl-5 border-l border-line',
+            i > 1 && 'border-t border-line lg:border-t-0',
+            i === 2 && 'lg:border-l lg:pl-6',
+          ]}
+        >
+          <dt class="order-2 mt-2 text-sm text-fg">
+            {n.label}
+            <span class="block text-xs text-faint">{n.note}</span>
+          </dt>
+          <dd class="display order-1 text-5xl text-fg sm:text-6xl">{n.value}</dd>
         </div>
       ))
     }
