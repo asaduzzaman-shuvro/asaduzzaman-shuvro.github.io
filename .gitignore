@@ -3,6 +3,8 @@ docs/plans/
 # Per-application values (CV headline/destination/start date; letter company, opening) — never committed
 src/data/cv.local.json
 src/data/letter.local.json
+# The confirmed work history, preferences and banned tools the build-cv skill reads — never committed
+src/data/cv.facts.md
 
 # Build output
 dist/
