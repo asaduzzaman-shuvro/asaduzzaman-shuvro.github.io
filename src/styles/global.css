@@ -2,45 +2,63 @@
 @plugin '@tailwindcss/typography';
 
 /*
-  NEON BRUTALIST — dark-only identity.
-  Near-black canvas, ONE electric accent (acid lime), oversized type, hard edges.
-  The site is committed to dark: acid lime only meets WCAG contrast on a dark ground,
-  so there is no light theme. `.dark` is kept on <html> so the dark variant resolves.
+  EDITORIAL — warm paper, ink, one vermilion accent, a serif display face.
+  Light-first with a real dark mode: `.dark` on <html> (set before paint in Base.astro from
+  localStorage.theme, falling back to prefers-color-scheme) overrides the colour variables below.
+  Every text token clears 4.5:1 on both `base` and `panel` in both themes — re-check with a
+  contrast script before changing one.
 */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Not `@theme inline`: utilities must reference the variables so `.dark` can swap them. */
 @theme {
-  /* Type — bold grotesk display, neutral body, mono for labels/code */
-  --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  /* Type — serif display, neutral body, mono only for code */
+  --font-display: 'Fraunces Variable', 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, monospace;
 
-  /* Surfaces */
-  --color-base: #0a0a0b;   /* page background */
-  --color-panel: #121214;  /* raised panels / cards */
-  --color-line: #2a2a2e;   /* hairline grid + borders */
-  --color-line-strong: #3f3f46;
+  /* Surfaces — warm paper */
+  --color-base: #f6f2ea;   /* page background */
+  --color-panel: #fffdf8;  /* raised panels / cards */
+  --color-line: #ddd5c6;   /* hairlines */
+  --color-line-strong: #c4baa8;
 
-  /* Foreground */
-  --color-fg: #f4f4f5;
-  --color-muted: #a1a1aa;
-  --color-faint: #808089;
+  /* Ink */
+  --color-fg: #17150f;
+  --color-muted: #57524a;
+  --color-faint: #6e685e;
 
-  /* THE accent — acid lime. One color, used with intent. */
-  --color-lime: #c6ff00;
-  --color-lime-bright: #d4ff3d;
-  --color-lime-dim: #9bc400;
+  /* THE accent — vermilion. Text-safe on base and panel (5.1:1 / 5.6:1). */
+  --color-accent-400: #d9541c;
+  --color-accent-500: #c2410c;
+  --color-accent-600: #b83c0b;
+  --color-on-accent: #fffdf8;
+}
 
-  /* Aliased so utilities like text-accent-* still resolve if referenced */
-  --color-accent-400: #d4ff3d;
-  --color-accent-500: #c6ff00;
-  --color-accent-600: #9bc400;
+.dark {
+  --color-base: #12110f;
+  --color-panel: #1b1a17;
+  --color-line: #2e2b26;
+  --color-line-strong: #45413a;
+
+  --color-fg: #ede8dd;
+  --color-muted: #b1aa9d;
+  --color-faint: #938c80;
+
+  --color-accent-400: #fb8a5c;
+  --color-accent-500: #f9733e;
+  --color-accent-600: #f9733e;
+  --color-on-accent: #12110f;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   background: var(--color-base);
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -52,53 +70,48 @@ body {
 }
 
 ::selection {
-  background: var(--color-lime);
-  color: #000;
+  background: var(--color-accent-600);
+  color: var(--color-on-accent);
 }
 
-/* --- Brutalist building blocks ------------------------------------------ */
+/* --- Editorial building blocks ------------------------------------------- */
 
-/* Hard, blur-free offset shadow — the core brutalist gesture. */
-@utility brutal-shadow {
-  box-shadow: 6px 6px 0 0 var(--color-lime);
-}
-@utility brutal-shadow-sm {
-  box-shadow: 4px 4px 0 0 var(--color-lime);
-}
-@utility brutal-shadow-white {
-  box-shadow: 6px 6px 0 0 var(--color-fg);
-}
-
-/* Faint blueprint grid, used as a section/hero backdrop. */
-@utility grid-lines {
-  background-image:
-    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-/* Oversized display headline default. */
+/* Serif display headline. Sentence case, tight leading; `em` inside turns italic + accent. */
 .display {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 0.92;
-  text-transform: uppercase;
+  font-weight: 560;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-optical-sizing: auto;
+}
+.display em {
+  font-style: italic;
+  font-weight: 480;
+  color: var(--color-accent-600);
 }
 
-/* Monospace micro-label (kicker / eyebrow). */
-.mono-label {
-  font-family: var(--font-mono);
+/* Small uppercase kicker / eyebrow. */
+.kicker {
+  font-family: var(--font-sans);
   font-size: 0.75rem;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-faint);
+}
+
+/* Section number, set like a magazine folio ("01"). */
+.folio {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--color-accent-600);
 }
 
 /* --- Scroll reveal (progressive enhancement) ---------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
   transition:
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -109,15 +122,11 @@ body {
   transform: none;
 }
 
-/* Marquee for the kinetic status/skill ticker. */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  display: inline-flex;
-  white-space: nowrap;
-  animation: marquee 30s linear infinite;
+/* Cross-page fade between the static pages; skipped under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 /* Reduced motion: kill all of it. */
@@ -129,9 +138,6 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
-  }
-  .marquee-track {
-    animation: none;
   }
   *,
   *::before,
