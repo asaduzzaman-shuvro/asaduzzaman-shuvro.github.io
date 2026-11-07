@@ -1,6 +1,7 @@
 # Personal working docs (local-only)
 docs/plans/
-# Per-application cover-letter values (company, opening) — never committed
+# Per-application values (CV headline/destination/start date; letter company, opening) — never committed
+src/data/cv.local.json
 src/data/letter.local.json
 
 # Build output

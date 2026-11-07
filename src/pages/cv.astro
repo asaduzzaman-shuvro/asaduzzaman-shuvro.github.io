@@ -6,26 +6,33 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/paper.css';
 import { getCollection } from 'astro:content';
-import { profile, statements, experience, education, languages, interests } from '../data/profile';
+import { profile, experience, education, languages, interests } from '../data/profile';
 import { sortProjects } from '../data/projects';
+import { loadCvInput, cvHeadline, locationLine, cvSummary, cvBullets, cvSkills, cvProjectCount } from '../data/cv';
+
+// Headline and relocation line: the real title and "Europe" for the public copy; per-application
+// values from the gitignored cv.local.json only under CV_LOCAL=1 (`npm run apply`).
+const cv = loadCvInput();
 
 // Two pages is the norm for a Norwegian CV; cap Selected work so the PDF never spills to three.
-const CV_PROJECTS = 4;
+// A tailored copy can lower the cap (or hide the section with 0) through cv.local.json.
+const CV_PROJECTS = cvProjectCount(cv);
 const projects = sortProjects(
   await getCollection('projects', ({ data }) => import.meta.env.PROD ? !data.draft : true)
 ).slice(0, CV_PROJECTS);
 
 const site = Astro.site!;
 const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+// No GitHub: the work is closed-source and the App Store is the portfolio. TripSplit keeps its
+// repo link in Selected work. The site stays — it holds the case studies behind the bullets.
 const contacts = [
   { label: profile.email, href: `mailto:${profile.email}` },
   { label: strip(profile.linkedin), href: profile.linkedin },
-  { label: strip(profile.github), href: profile.github },
   { label: strip(site.href), href: site.href },
 ];
 const projectLink = (links: { github?: string; appstore?: string; live?: string }) =>
   links.appstore ?? links.live ?? links.github;
-const title = `${profile.name} — CV`;
+const title = `${profile.name} - CV`;
 ---
 
 <!doctype html>
@@ -47,16 +54,16 @@ const title = `${profile.name} — CV`;
     <main class="page">
       <header class="head">
         <h1>{profile.name}<span class="dot" aria-hidden="true"></span></h1>
-        <p class="role">{profile.role} · {profile.tagline}</p>
+        <p class="role">{cvHeadline(cv)}</p>
         <ul class="contacts">
-          <li>{profile.location} · {profile.relocation}</li>
+          <li>{locationLine(cv)}</li>
           {contacts.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
         </ul>
       </header>
 
       <section>
         <h2>Summary</h2>
-        <p>{profile.summary}</p>
+        <p>{cvSummary(cv)}</p>
       </section>
 
       <section>
@@ -72,7 +79,7 @@ const title = `${profile.name} — CV`;
                 <p class="period">{job.period}</p>
               </div>
               <ul class="bullets">
-                {job.bullets.map((b) => <li>{b}</li>)}
+                {cvBullets(cv, job).map((b) => <li>{b}</li>)}
               </ul>
               {job.apps.length > 0 && <p class="apps">Apps: {job.apps.join(', ')}</p>}
             </article>
@@ -80,31 +87,35 @@ const title = `${profile.name} — CV`;
         }
       </section>
 
-      <section>
-        <h2>Selected work</h2>
-        <ul class="projects">
-          {
-            projects.map((p) => {
-              const href = projectLink(p.data.links);
-              return (
-                <li>
-                  <p class="project-head">
-                    <strong>{p.data.title}</strong>
-                    {href && <a href={href}>{strip(href)}</a>}
-                  </p>
-                  <p class="project-summary">{p.data.summary}</p>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </section>
+      {
+        projects.length > 0 && (
+          <section>
+            <h2>Selected work</h2>
+            <ul class="projects">
+              {
+                projects.map((p) => {
+                  const href = projectLink(p.data.links);
+                  return (
+                    <li>
+                      <p class="project-head">
+                        <strong>{p.data.title}</strong>
+                        {href && <a href={href}>{strip(href)}</a>}
+                      </p>
+                      <p class="project-summary">{p.data.summary}</p>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </section>
+        )
+      }
 
       <section>
         <h2>Skills</h2>
         <dl class="skills">
           {
-            statements.map((s) => (
+            cvSkills(cv).map((s) => (
               <div>
                 <dt>{s.area}</dt>
                 <dd>{s.skills.join(', ')}</dd>
@@ -122,7 +133,7 @@ const title = `${profile.name} — CV`;
         </div>
         <div>
           <h2>Languages</h2>
-          {languages.map((l) => <p><strong>{l.name}</strong> — {l.level}</p>)}
+          {languages.map((l) => <p><strong>{l.name}</strong> · {l.level}</p>)}
         </div>
         <div>
           <h2>Interests</h2>
@@ -208,7 +219,7 @@ const title = `${profile.name} — CV`;
   }
   .skills div {
     display: grid;
-    grid-template-columns: 26mm 1fr;
+    grid-template-columns: 30mm 1fr;
     gap: 8px;
   }
   .skills div + div {
