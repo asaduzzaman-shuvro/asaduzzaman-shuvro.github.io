@@ -12,7 +12,7 @@ export interface LetterInput {
   /**
    * The employer's country ("Norway", "Germany"…). The location paragraph says "relocate to
    * <country>": a letter goes to one employer, so it names their country and never ranks it
-   * against others. The site is where "Norway first, open to the Nordics and Central Europe" lives.
+   * against others. The site names regions only, never a ranking.
    */
   country: string;
 }

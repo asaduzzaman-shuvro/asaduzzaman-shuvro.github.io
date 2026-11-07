@@ -5,6 +5,14 @@ const norwaySince = 2017; // SPENN, then DN Media Group from 2021 — both via C
 // Computed at build time, so "12 years" doesn't go stale.
 const years = new Date().getFullYear() - since;
 
+const summaryLead =
+  `iOS engineer with ${years} years building native apps in Swift, SwiftUI and UIKit, currently a Staff Software Engineer consulting for DN Media Group via Cefalo.`;
+// The summary positions, the bullets prove — no claim twice. Proof (bridge, Swift 6, SDUI, the
+// numbers) lives in the experience bullets; this names the stack, the product, the backend range
+// since 2025, Norway, and the team, in about 85 words with the relocation sentence.
+const summaryBody =
+  `Hands-on across DN Media Group’s eight news apps, including DN, Norway’s leading business daily, and since 2025 across the Java and Spring Boot services behind them. Nine years working daily with Norwegian product teams in Oslo. Leads a five-engineer iOS and backend team through architecture standards, code review and mentoring; several engineers have moved into senior roles.`;
+
 export const profile = {
   name: 'A K M Asaduzzaman',
   handle: 'shuvro', // short id used in brutalist mono labels
@@ -29,22 +37,29 @@ export const profile = {
     'Now I care about three things: software that feels instant, architecture simple enough to move fast, and growing the engineers who build it.',
   ],
 
-  // Résumé-voice summary for the printable /cv page (the bio above is the site's voice).
-  summary:
-    `iOS engineer with ${years} years of experience building native apps in Swift, SwiftUI and UIKit, now a Staff Software Engineer consulting for DN Media Group via Cefalo. Leads the team behind DN Media Group’s news apps, including a 290K-download news app at a 99.3% crash-free rate, while staying hands-on in the code and driving architecture decisions. Nine years working for Norwegian companies — SPENN from ${norwaySince}, DN Media Group from 2021 — daily with product and design teams in Oslo, including onsite. Has shipped fintech, media and social apps used by hundreds of thousands of people. Writes clean, well-tested code, and leads and mentors engineers across iOS and backend.`,
+  // Résumé-voice summary for the printable /cv page (the bio above is the site's voice). Split
+  // in two so a tailored copy can put the level note (src/data/cv.ts) right after the lead. The
+  // move is stated once, in the header line, not here. `summary` is the join, for the page's
+  // meta description.
+  summaryLead,
+  summaryBody,
+  summary: `${summaryLead} ${summaryBody}`,
 
   location: 'Dhaka, Bangladesh',
-  // Printed on the CV and letter headers — documents one employer reads — so it names no country
-  // and ranks none. The site is where "Norway first, open to the Nordics and Central Europe"
-  // lives (`availability`); the strip and About say "Dhaka → Europe". Covers the move only — a
-  // non-EU hire still needs the employer's permit application.
-  relocation: 'Relocating to Europe, self-funded',
+  // Printed on the LinkedIn banner, and the CV/letter default (src/data/cv.ts builds the same
+  // line from `destination`). Names no country and ranks none — one employer reads a CV, and the
+  // site is read by all of them. Says nothing about who pays: "self-funded" gave away relocation
+  // money Nordic employers often cover. Covers the move only — a non-EU hire still needs the
+  // employer's permit application.
+  relocation: 'Relocating to Europe',
   company: 'Cefalo', // legal employer (JSON-LD worksFor)
   client: 'DN Media Group', // who the work is for — recruiters know this name, not Cefalo
   since,
   // Contact-section copy.
   availability:
-    'Open to Staff or Senior iOS roles in Europe — Norway first, and open to the Nordics and Central Europe — relocating, and already working with Oslo teams every day. The fastest way to reach me is email.',
+    // Names no country: a hiring manager in Stockholm or Vienna who reads "Norway first" learns
+    // they are second choice. The ranking lives only in the (gitignored) job-search notes.
+    'Open to Staff or Senior iOS roles in the Nordics and Central Europe — relocating, and already working with Oslo teams every day. The fastest way to reach me is email.',
 
   email: 'asaduzzaman.duet@gmail.com',
   linkedin: 'https://www.linkedin.com/in/asaduzzamanshuvro/',
@@ -92,14 +107,14 @@ export const statements = [
     headline: 'Mobile in front.',
     blurb:
       'Native iOS apps from architecture to App Store — feeds that scroll without a hitch, crash-free rates that hold, and security built in from day one.',
-    skills: ['Swift', 'Swift 6', 'SwiftUI', 'UIKit', 'Liquid Glass (iOS 26)', 'Combine', 'Swift Concurrency', 'Observation', 'SwiftData', 'Objective-C', 'MVVM', 'MVVM-C', 'Clean Architecture', 'Modularization', 'Swift Package Manager', 'XCTest', 'XCUITest', 'Accessibility', 'PDFKit', 'SSL pinning', 'Encryption', 'OWASP Mobile Top 10', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Crashlytics', 'Charles Proxy'],
+    skills: ['Swift', 'Swift 6', 'SwiftUI', 'UIKit', 'Liquid Glass (iOS 26)', 'Combine', 'Swift Concurrency', 'Observation', 'SwiftData', 'Objective-C', 'MVVM', 'MVVM-C', 'Clean Architecture', 'Modularization', 'Server-driven UI', 'Swift Package Manager', 'XCFramework', 'WKWebView', 'Web-to-native bridge', 'XCTest', 'XCUITest', 'Accessibility', 'PDFKit', 'SSL pinning', 'Encryption', 'OWASP Mobile Top 10', 'Push notifications', 'WebRTC', 'Fastlane', 'CI/CD', 'Crashlytics'],
   },
   {
-    area: 'Backend',
+    area: 'Backend & web',
     headline: 'Backend behind it.',
     blurb:
       'The services and integrations that power the apps — event-driven, reliable, and built to handle real traffic.',
-    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs'],
+    skills: ['Java', 'Spring Boot 3', 'RabbitMQ', 'Braze', 'REST APIs', 'TypeScript', 'Vue.js', 'Node.js'],
   },
   {
     area: 'Leadership',
@@ -120,43 +135,47 @@ export const statements = [
 // Condensed work history for the Experience section. Years only — keep it scannable.
 export const experience = [
   {
-    period: '2025 — now',
+    period: '2025 - now',
     role: 'Staff Software Engineer',
     company: 'DN Media Group · consultant via Cefalo',
+    // Hands-on work first — the roles being applied for are senior IC roles, and a screener
+    // reads the first two bullets. Leadership is one bullet; the Braze connector is in Selected work.
     bullets: [
-      'Lead the iOS and backend teams (5 engineers) — project planning, stakeholder communication, on-time delivery.',
-      'Set architecture and engineering standards across iOS (Swift, SwiftUI) and backend (Java, Spring, RabbitMQ).',
-      'Built and shipped iOS features in Swift and SwiftUI with product and design, from discovery to release — including sign-in and authentication flows and an in-app PDF reader.',
-      'Built and run a Java connector between client services and Braze, handling 100K+ engagement events a day, while still contributing to mobile app features.',
-      'Mentor engineers through code reviews and design discussions, with a focus on scalability, security and performance.',
-    ],
-    apps: ['DN', 'TradeWinds'],
-  },
-  {
-    period: '2021 — 2025',
-    role: 'Senior Software Engineer',
-    company: 'DN Media Group · consultant via Cefalo',
-    bullets: [
-      'Led the iOS team that designed and shipped eight production apps.',
-      'Spearheaded the DN news app — 290K downloads, 30K+ daily / 200K+ weekly active users, 99.3% crash-free.',
-      'Introduced modularization and team-wide practices that cut release time by 60%.',
-      'Mentored engineers into senior roles.',
+      'Built and maintain the web-to-native bridge across all eight apps: web content posts navigation, sign-in, paywall and sharing events, native owns navigation, auth and device capabilities, and one shared contract lets each side ship independently.',
+      'Migrated the shared networking, feed and auth modules to Swift 6 strict concurrency with async/await and actors, clearing data-race warnings across all eight apps.',
+      'Build and ship SwiftUI features with product and design from discovery to release: sign-in and authentication flows, an in-app PDF reader, and the iOS 26 Liquid Glass adoption across the app family.',
+      'Own the testing standard: unit tests for view models and networking, integration tests across the modular packages, and XCUITest flows for sign-in and critical paths, all run on every PR in GitHub Actions.',
+      'Lead the iOS and backend teams (5 engineers): architecture and engineering standards across Swift/SwiftUI and Java/Spring Boot/RabbitMQ, and mentoring through code review that has moved several engineers into senior roles.',
+      'Built the team’s AI tooling on Claude Code: code-review agents, a tickets-to-branches plugin, and log root-cause and deployment skills, used daily by all five engineers. Agents take the first pass; human review decides what ships.',
     ],
     apps: shippedApps.map((app) => app.name),
   },
   {
-    period: '2017 — 2021',
+    period: '2021 - 2025',
+    role: 'Senior Software Engineer',
+    company: 'DN Media Group · consultant via Cefalo',
+    bullets: [
+      'Led the iOS team that designed and shipped eight production apps for DN Media Group’s brands.',
+      'Built the server-driven UI layer used across all eight: the server defines screen composition, content and actions, the client renders from a shared component library with a fallback for unknown types, so editors change layouts without an App Store release.',
+      'Introduced modularization with clear module ownership and dependency injection, cutting release time by 60% and letting five engineers ship in parallel, with Fastlane releases on GitHub Actions and Azure DevOps.',
+      'Spearheaded the DN news app (290K downloads, 200K+ weekly active users, 99.3% crash-free) and engineered its feed for smooth scrolling under heavy image load with prefetching, image caching and cell reuse.',
+      'Six months on the dn.no front page in TypeScript, Vue.js and Node, alongside the iOS work.',
+    ],
+    apps: [],
+  },
+  {
+    period: '2017 - 2021',
     role: 'Software Engineer',
     company: 'SPENN · consultant via Cefalo',
     bullets: [
       'Built SPENN, a cashless payments app launched in Rwanda and Tanzania, used by 30K people a week.',
-      'Hardened it for finance — encryption, SSL pinning, and data protection against attacks.',
+      'Hardened it for finance: encryption, SSL pinning, and data protection against attacks.',
       'Delivered business-critical features end to end within financial regulations.',
     ],
     apps: ['SPENN'],
   },
   {
-    period: '2016 — 2017',
+    period: '2016 - 2017',
     role: 'Software Engineer',
     company: 'GagaGugu Ltd',
     bullets: [
@@ -166,7 +185,7 @@ export const experience = [
     apps: [],
   },
   {
-    period: '2014 — 2016',
+    period: '2014 - 2016',
     role: 'Earlier',
     company: 'AdvanceApp Bangladesh · Arena Mobile BD · Nested Apps',
     bullets: [
@@ -175,7 +194,7 @@ export const experience = [
       'Kaler Kantho, the news app of a leading Bangladeshi daily, and Shipero for tracking parcels and goods.',
       'A cartoon image maker (100K downloads) with a custom lazy-loading image grid.',
     ],
-    apps: ['MyBL', 'Kaler Kantho', 'Shipero', 'investFeed'],
+    apps: [],
   },
 ] as const;
 
