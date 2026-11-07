@@ -39,7 +39,6 @@ const host = Astro.site!.host;
       </div>
 
       <p class="relative flex items-center gap-3 font-mono text-xl tracking-[0.18em] text-muted uppercase">
-        <span class="inline-block h-4 w-4 bg-lime"></span>
         {profile.role} · {splitFixedCase(profile.tagline).map((part, k) => (k % 2 ? <span class="normal-case">{part}</span> : part))}
       </p>
 
@@ -52,7 +51,6 @@ const host = Astro.site!.host;
 
       <p class="relative flex items-center justify-between font-mono text-xl tracking-wider text-faint">
         <span>{host}</span>
-        <span class="h-4 w-4 bg-lime" aria-hidden="true"></span>
       </p>
     </main>
   </body>
