@@ -16,7 +16,8 @@ npm run build    # static build to ./dist (also runs content sync + type gen)
 npm run preview  # serve the built ./dist locally
 npm run cv       # render /cv → public/cv.pdf and /og → public/og.png (headless Chrome; deploy runs it)
 npm run og       # same script as `cv` — both assets come from one build
-npm run letter   # render /letter → ~/Downloads/…Cover letter.pdf (never into public/; see below)
+npm run apply    # render the application pair, /cv + /letter, to ~/Downloads (never into public/; see below)
+npm run letter   # same script as `apply`
 npm run banner   # render /banner → ~/Downloads/linkedin-banner.png (1584×396 LinkedIn banner; never into public/)
 ```
 
@@ -146,14 +147,39 @@ not the PDF. Keep heading letter-spacing tight on that page — wide tracking ma
 extractors (and ATS parsers) split words into letters. It deliberately has no phone or
 address. The paper styles it shares with `/letter` live in `src/styles/paper.css`.
 
+**Per-application CVs come from the `build-cv` skill in `.claude/skills/build-cv/` (decided
+2026-11-07, replacing an earlier plan to build them in an external kit).** It takes a posting,
+spawns `cv-researcher` (web research), `cv-gap-reviewer` (compares `profile.ts` with the ad
+against the private facts file) and `cv-builder` (writes `cv.local.json`, renders, checks), the
+three agents in `.claude/agents/`, and ends with a verdict. Its source of truth is
+`src/data/cv.facts.md` (gitignored): the confirmed work history, preferences, hard filter and
+banned tools. Nothing goes on a tailored CV that is not in that file. `scripts/check-cv.sh <pdf>`
+is the gate: two pages, no em or en dash, no repeated six-word phrase, no banned tool. The
+verdict log is `docs/plans/job-log.md` (gitignored).
+
+**A tailored CV is rendered the same way, never into `public/`.** `src/data/cv.ts` reads
+`src/data/cv.local.json` (gitignored: `headline`, `destination`, `permit`, `availableFrom`, and
+per-application `summary`, `bullets` keyed by job period, `skills` rows, `projectCount`) only
+under `CV_LOCAL=1`; otherwise `/cv` prints the defaults — the real title and the location with
+**no relocation line** (removed at the user's request on 2026-11-07) — which is what `npm run cv`
+deploys. The header has no GitHub link (closed-source work; TripSplit keeps its repo link in
+Selected work) and never says who pays for a move. The headline follows the level of the
+posting ("Senior iOS Engineer" for a senior role) while the experience section keeps the real
+title, and the summary then carries `levelNote` saying the level is a choice. The summary is
+`summaryLead` + that note + `summaryBody` from `profile.ts`; the move is stated once, in the
+header line, never repeated in the summary. Experience bullets lead with hands-on work (the roles applied
+for are senior IC roles); leadership is one bullet. Never invent a start date — `availableFrom`
+unset prints nothing.
+
 **The application letter is generated too, and never deployed.** `src/pages/letter.astro`
 returns an empty 204 unless `LETTER=1`, so a plain build writes no `dist/letter/` (a 404 would
 render the custom 404 page there instead); it is also filtered from the sitemap. Per-application
 values (company, role, greeting, opening) come from `src/data/letter.local.json`, which is
-**gitignored because this repo is public** — only `letter.ts` defaults are committed.
-`npm run letter` (`scripts/render-letter.sh`) builds with `LETTER=1`, prints to `~/Downloads`,
-then rebuilds plain so `dist/` is clean. Body paragraphs carry `[TODO …]` markers for facts
-still to be filled in.
+**gitignored because this repo is public** — only `letter.ts` defaults are committed. Its header
+reads the same `cv.local.json` values as the CV so the pair agrees. `npm run apply`
+(`scripts/render-application.sh`, also `npm run letter`) builds with `LETTER=1 CV_LOCAL=1`,
+prints both PDFs to `~/Downloads` (or `npm run apply -- <dir>`), then rebuilds plain so `dist/`
+is clean. Body paragraphs carry `[TODO …]` markers for facts still to be filled in.
 
 Work history lives in `experience` in `profile.ts` (years only; month-level dates live on the
 resume and LinkedIn, aligned to the resume on 2026-10-28). **Lead with the client, not the
@@ -162,12 +188,16 @@ to DN Media Group (earlier SPENN) employed by Cefalo, so experience lines, bio, 
 studies read "DN Media Group · consultant via Cefalo" — a Norwegian recruiter knows DN, not
 Cefalo. **Never write NHST in public text** (the group's former name; a code comment may keep
 it). **Relocation, by audience.** The target is Europe: Norway first, then the Nordics and
-Central Europe. The site, read by many, says so (`profile.availability`, meta description) and
-shortens it to "Dhaka → Europe" in the strip and About. The CV and letter headers print
-`profile.relocation` ("Relocating to Europe, self-funded"), which names no country and ranks
-none, because one employer reads them; the letter body names that employer's country from
-`country` in the gitignored `letter.local.json`. It covers the move only and never implies
-the employer has no permit work. Keep claims to what the resume states or what the user has
+Central Europe — but that ranking lives only in the gitignored notes and memory. **Nothing
+public ranks a country**: the site says "the Nordics and Central Europe" (`profile.availability`)
+and "Dhaka → Europe" in the strip and About, because a hiring manager in Stockholm or Vienna
+who reads "Norway first" learns they are second choice. The CV and letter headers print the
+location only by default (`locationLine()` in `cv.ts`); `profile.relocation` ("Relocating to
+Europe") survives on the LinkedIn banner. A tailored copy prints "Dhaka, Bangladesh · Relocating
+to <destination> on a <permit> · available from <date>" from the gitignored `cv.local.json`, and
+the letter body names the country from `country` in `letter.local.json`. A relocation line, where
+one is printed, covers the move only: it never says who pays (no "self-funded" — that gives away
+relocation money) and never implies the employer has no permit work. Keep claims to what the resume states or what the user has
 answered in writing in `docs/plans/` (gitignored); new case studies stay `draft: true` until
 signed off. When describing the AI tooling, name capabilities, never internal system, vendor or
 client-infra names — those identify the client's stack, not the user's skill.
