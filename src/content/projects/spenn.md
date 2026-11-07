@@ -1,6 +1,6 @@
 ---
-title: SPENN — cashless payments, on iOS
-summary: A cashless payments app launched in Rwanda and Tanzania — transfer money and pay digitally, with security built for finance. Used by 30K people a week.
+title: SPENN, cashless payments on iOS
+summary: Mobile money on iOS for Rwanda and Tanzania. The security and reliability work behind a regulated payments product, from transfer flows to data protection.
 type: professional
 role: iOS Engineer
 tech: [Swift, UIKit, SSL pinning, Encryption, REST APIs]

@@ -1,6 +1,6 @@
 ---
-title: DN — Norway's business news, on iOS
-summary: The iOS app for Dagens Næringsliv, Norway's leading business daily — a fast, hitch-free news feed for 30K+ daily and 200K+ weekly readers.
+title: DN, Norway's business news on iOS
+summary: "The iOS app for Dagens Næringsliv, Norway's leading business daily: a fast, hitch-free news feed for 30K+ daily and 200K+ weekly readers."
 type: professional
 role: iOS Team Lead → Staff Engineer
 teamSize: DN Media Group’s iOS team, via Cefalo

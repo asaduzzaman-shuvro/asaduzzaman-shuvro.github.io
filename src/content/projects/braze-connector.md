@@ -1,6 +1,6 @@
 ---
 title: Braze engagement connector
-summary: A Java service that connects DN Media Group's client systems to Braze for customer-engagement messaging — 100K+ events a day.
+summary: A Java service that connects DN Media Group's client systems to Braze for customer-engagement messaging, moving 100K+ events a day.
 type: professional
 role: Staff Engineer & Team Lead
 teamSize: 5 engineers (iOS + backend)
