@@ -5,7 +5,8 @@
 # (headline, destination, permit, start date) and src/data/letter.local.json (company, role,
 # greeting, opening, country). The build runs with LETTER=1 so the letter page renders and
 # CV_LOCAL=1 so the CV reads its local file; the final plain build leaves dist/ exactly as a
-# deploy would see it — no letter, and public/cv.pdf untouched.
+# deploy would see it — no letter, and public/cv.pdf untouched. LETTER_ONLY=1 prints the letter
+# alone, for an application sent with a hand-made CV (the build-cv skill's manual mode).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -31,9 +32,11 @@ for _ in $(seq 1 30); do
 done
 
 mkdir -p "$OUT_DIR"
-"$CHROME" --headless=new --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="$CV_OUT" "http://localhost:$PORT/cv/" 2>/dev/null
-echo "Wrote $CV_OUT"
+if [ -z "${LETTER_ONLY:-}" ]; then
+  "$CHROME" --headless=new --disable-gpu --no-pdf-header-footer \
+    --print-to-pdf="$CV_OUT" "http://localhost:$PORT/cv/" 2>/dev/null
+  echo "Wrote $CV_OUT"
+fi
 "$CHROME" --headless=new --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="$LETTER_OUT" "http://localhost:$PORT/letter/" 2>/dev/null
 echo "Wrote $LETTER_OUT"
