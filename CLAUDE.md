@@ -155,7 +155,12 @@ three agents in `.claude/agents/`, and ends with a verdict. Its source of truth 
 `src/data/cv.facts.md` (gitignored): the confirmed work history, preferences, hard filter and
 banned tools. Nothing goes on a tailored CV that is not in that file. `scripts/check-cv.sh <pdf>`
 is the gate: two pages, no em or en dash, no repeated six-word phrase, no banned tool. The
-verdict log is `docs/plans/job-log.md` (gitignored).
+verdict log is `docs/plans/job-log.md` (gitignored). The skill first asks which CV to work
+from: the site CV, or one the user made by hand (Google Docs, a PDF link or path, a DOCX). A
+hand-made CV is reviewed against the same facts file, comes back as a fact-gated list of exact
+edits the user makes in their own tool, and passes `check-cv.sh` on the PDF they export; its text
+stays in the session scratchpad, never in the repo. `LETTER_ONLY=1 npm run apply` prints the
+letter without the site CV for that case.
 
 **A tailored CV is rendered the same way, never into `public/`.** `src/data/cv.ts` reads
 `src/data/cv.local.json` (gitignored: `headline`, `destination`, `permit`, `availableFrom`, and
