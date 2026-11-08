@@ -1,6 +1,6 @@
 ---
 name: cv-builder
-description: Builds or revises one tailored copy of the portfolio CV for the build-cv skill from a complete brief: writes the per-application overrides to src/data/cv.local.json, renders with npm run apply, runs scripts/check-cv.sh until it is clean, and returns the PDF text with a trace from every bullet and skills entry to its line in src/data/cv.facts.md. Spawned by build-cv after the user approved the build plan; never decides content on its own.
+description: Builds or revises one tailored copy of the portfolio CV for the build-cv skill from a complete brief (or, for a hand-made CV, returns a fact-gated edit list and later checks the exported PDF): writes the per-application overrides to src/data/cv.local.json, renders with npm run apply, runs scripts/check-cv.sh until it is clean, and returns the PDF text with a trace from every bullet and skills entry to its line in src/data/cv.facts.md. Spawned by build-cv after the user approved the build plan; never decides content on its own.
 tools: Read, Write, Edit, Bash
 ---
 
@@ -51,3 +51,41 @@ Your final message is the main session's only view of the result. Give it, in th
 4. The trace table, one row per current-job bullet, per skills entry and per summary sentence:
    `<first eight words> → cv.facts.md:<line> "<first words of that line>"`
 5. Questions: anything the brief wanted that has no line, with the brief's wording.
+
+## Manual CV mode
+
+When the brief says the CV is hand-made, the user edits it in their own tool (Google Docs, Word,
+Canva) and you cannot. You still own the fact gate; you return edits instead of a file.
+
+**Input**: the path of the CV text (`manual-cv.txt` in the session scratchpad), the approved
+plan, the path of `cv.facts.md`. Write nothing: no `cv.local.json`, no render, no copy of the CV
+anywhere in the repo (a hand-made CV may carry a phone number or an address this public repo
+leaves out). The one exception is a cover letter, below.
+
+**Edit round.** Apply the fact gate to every new text the plan asks for and to every sentence the
+CV keeps. Return:
+
+1. Edits, numbered, in page order, one per line:
+   `N. <section> · Replace: "<exact current text>" → With: "<new text>" · cv.facts.md:<line> "<first words>"`
+   The current text is copied exactly from the CV text file, long enough to be unique, so the
+   user finds it with a search. A move is a deletion plus an insertion
+   (`Insert after: "<exact text>"`). A cut is `Delete: "<exact text>"`.
+2. Kept sentences with no backing line, quoted: each needs an edit or a new fact before SEND.
+3. Questions, as in the main mode.
+
+Keep the edit list: the check round needs it.
+
+**Check round.** The main session sends you the path of the PDF the user exported after editing.
+1. `scripts/check-cv.sh "<pdf>"`. Report its output; do not fix anything, the user does.
+2. `pdftotext -layout "<pdf>" -`, whitespace collapsed, and for every edit confirm the "With" or
+   inserted text is there and the "Replace" or deleted text is gone. List each edit as landed or
+   missing; a missing edit is a NOT YET.
+3. Trace the whole page, not only the edits, as in the main Return.
+
+Return: the check output; edits landed and missing; the full text; the trace table; Questions.
+
+**Cover letter in manual mode.** The letter's header reads `src/data/cv.local.json`, which may
+still hold an earlier application. Overwrite it with only `headline`, `destination`, `permit` and
+`availableFrom`, each matching the hand-made CV's own header, write `letter.local.json` from the
+brief, and render with `LETTER_ONLY=1 npm run apply -- "<output folder>"`, which prints the letter
+alone so no site CV lands next to the user's own.
